@@ -7,7 +7,7 @@ class CreateWorks < ActiveRecord::Migration[5.0]
       t.string :price
       t.date :created_date
       t.date :deadline
-      # t.integer:status
+      t.integer:status
 
       t.timestamps
     end

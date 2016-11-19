@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20161119091252) do
     t.integer  "user_id"
     t.integer  "work_id"
     t.date     "joined_date"
+    t.integer  "status"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["user_id"], name: "index_joiners_on_user_id"
@@ -87,6 +88,7 @@ ActiveRecord::Schema.define(version: 20161119091252) do
     t.string   "price"
     t.date     "created_date"
     t.date     "deadline"
+    t.integer  "status"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["user_id"], name: "index_works_on_user_id"
