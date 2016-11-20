@@ -1,0 +1,38 @@
+<% provide(:title, 'List of projects') %>
+<h1>List of projects</h1>
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<ul class="works">
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <table style="width:100%">
+	<thead>
+  		<tr>
+    		<th>id</th>
+    		<th>Project's name</th> 
+    		<th>Customer</th>
+    		<th>Description</th>
+    		<th>Price</th>
+    		<th>Options</th>
+  		</tr>
+	</thead>
+	<tbody>
+  		<tr>
+    		<%= @works.each do |works|  %>
+      			<td><%= link_to work.id, work %></td>
+      			<td><%= link_to work.name, work %></td>
+      			<td><%= link_to work.user, work %></td>
+      			<td><%= link_to work.description, work %></td>
+      			<td><%= link_to work.price, work %></td>
+      			<td><%=  link_to '<button type="button">New Post</button>'.html_safe, works_new_path %></td>
+    		<% end %>
+  		</tr>
+	</tbody>
+  </table>
+  </div>	
+</div>
+</ul>
