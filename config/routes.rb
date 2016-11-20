@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  get 'works/new'
 
-  get 'works/edit'
+  get 'search_works', to: 'search_works#index'
 
-  get 'search_works/index'
+  get '/works/new', to: 'works#new'
+
+  get '/works/edit', to: 'works#edit'
 
   get 'sessions/new'
 
@@ -14,6 +15,6 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   resources :users
-
+  resources :works
 
 end 

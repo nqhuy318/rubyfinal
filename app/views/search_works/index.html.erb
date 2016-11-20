@@ -1,2 +1,27 @@
-<h1>SearchWorks#index</h1>
-<p>Find me in app/views/search_works/index.html.erb</p>
+<h1></h1>
+<table class="table table-hover table-border">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Hoster</th>
+            <th>Work name</th>
+            <th>Skill</th>
+            <th>Price</th>
+            <td>Action</td>
+        </tr>
+    </thead>
+    <tbody>
+        <% if !@works.nil?
+          @works.each_with_index do |work, index| %>
+            <tr>
+                <td><%= index+1 %> </td>
+                <td><%= work.user.fullname%> </td>
+                <td><%= work.name %></td>
+                <td><%= work.work_categories  %> </td>
+                <td><%= work.price %> $</td>
+                <td><%= %></td>
+            </tr>
+          <% end
+        end%>
+    </tbody>
+</table>
