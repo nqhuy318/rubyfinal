@@ -9,11 +9,16 @@ class WorksController < ApplicationController
   end
 
   def create
+    @user = current_user
     @work = Work.new(work_params)
+    @work.user = @user
+    #    @work = @user.build(params[:work])
     if @work.save
-      redirect_to @work
+      flash[:success] = "Project created"
+      #      redirect_to @work
     else
-    render 'new'
+      flash[:danger] = "Cannot create"
+      render 'new'
     end
   end
 
@@ -37,7 +42,8 @@ class WorksController < ApplicationController
 
   private
 
-    def work_params
-      params.require(:work).permit(:name, :description, :price)
-    end
+  def work_params
+    params.require(:work).permit(:name, :description, :price)
+    
+  end
 end
