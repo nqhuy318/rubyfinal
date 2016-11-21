@@ -42,7 +42,7 @@ class WorksController < ApplicationController
 
   def destroy
     Work.find(params[:id]).destroy
-    redirect_to @works
+    redirect_to @work
   end
 
   private
@@ -50,5 +50,9 @@ class WorksController < ApplicationController
   def work_params
     params.require(:work).permit(:name, :description, :price)
     
+  def new
+  end
+
+  def edit
   end
 end

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'search_works/index'
 
+  get 'search_works', to: 'search_works#index'
+
   get 'sessions/new'
 
   root 'static_pages#home'
