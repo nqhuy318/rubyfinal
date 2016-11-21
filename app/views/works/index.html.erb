@@ -29,7 +29,7 @@ table, th, td {
       			<td><%= work.user_id %></td>
       			<td><%= work.description %></td>
       			<td><%= work.price %></td>
-            <td><%=  link_to '<button type="button">Show</button>'.html_safe, works__path %></td>
+            <td><%=  link_to '<button type="button">Show</button>'.html_safe, works_new_path %></td>
       			<td><%=  link_to '<button type="button">Edit</button>'.html_safe, '/works/@work.id/edit' %></td>
             <td><%=  link_to '<button type="button">Delete</button>'.html_safe, works_delete_path %></td>
         </tr>
