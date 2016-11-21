@@ -17,7 +17,7 @@ table, th, td {
     		<th>Customer</th>
     		<th>Description</th>
     		<th>Price</th>
-    		<th colspan="2">Options</th>
+    		<th colspan="3">Options</th>
   		</tr>
 	</thead>
 	<tbody>
@@ -29,8 +29,9 @@ table, th, td {
       			<td><%= work.user_id %></td>
       			<td><%= work.description %></td>
       			<td><%= work.price %></td>
-      			<td><%=  link_to '<button type="button">Edit</button>'.html_safe, works_edit_path %></td>
-            <td><%=  link_to '<button type="button">Delete</button>'.html_safe, works_edit_path %></td>
+            <td><%=  link_to '<button type="button">Show</button>'.html_safe, works__path %></td>
+      			<td><%=  link_to '<button type="button">Edit</button>'.html_safe, '/works/@work.id/edit' %></td>
+            <td><%=  link_to '<button type="button">Delete</button>'.html_safe, works_delete_path %></td>
         </tr>
     		<% end %>
   		

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get '/works/new', to: 'works#new'
   post '/works/new', to: 'works#create'
+  delete 'works/delete', to: 'works#destroy'
 
   get 'works/edit'
 

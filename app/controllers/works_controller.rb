@@ -8,6 +8,10 @@ class WorksController < ApplicationController
     @work = Work.new
   end
 
+  def index
+    @works = Work.all
+  end
+
   def create
     @user = current_user
     @work = Work.new(work_params)
@@ -22,10 +26,6 @@ class WorksController < ApplicationController
     end
   end
 
-  def index
-    @works = Work.all
-  end
-
   def edit
     @work = Work.find(params[:id])
   end
@@ -38,6 +38,11 @@ class WorksController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    Work.find(params[:id]).destroy
+    redirect_to @works
   end
 
   private
