@@ -9,17 +9,26 @@ class WorksController < ApplicationController
   end
 
   def index
-    @works = Work.all
+    @user = current_user
+    if @user.nil?
+      flash[:danger] = "Please login"
+      redirect_to login_path
+    else
+      if @user[:role_id] == 2
+        @works = Work.where(user_id: @user.id)
+      else
+        flash[:warning] = "You don't have permission"
+      end
+    end
   end
 
   def create
     @user = current_user
     @work = Work.new(work_params)
     @work.user = @user
-    #    @work = @user.build(params[:work])
     if @work.save
       flash[:success] = "Project created"
-            redirect_to @work
+      redirect_to @work
     else
       flash[:danger] = "Cannot create"
       render 'new'
@@ -42,18 +51,12 @@ class WorksController < ApplicationController
 
   def destroy
     Work.find(params[:id]).destroy
-    redirect_to @work
+    redirect_to '/works'
   end
 
   private
 
   def work_params
     params.require(:work).permit(:name, :description, :price)
-  end
-  
-  def new
-  end
-
-  def edit
   end
 end

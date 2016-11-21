@@ -19,7 +19,7 @@
                 <td><%= work.name %></td>
                 <td><%= work.categories.name  %> </td>
                 <td><%= work.price %> $</td>
-                <td><%= link_to 'View detail', '/works/'+work.id.to_s, class: "btn btn-lg btn-primary" %></td>
+                <td><%= link_to 'View detail', '/works/'+(work.id.to_s), class: "btn btn-lg btn-primary" %></td>
               </tr>
             <% end
           end%>
