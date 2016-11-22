@@ -5,23 +5,35 @@
             <th>#</th>
             <th>Hoster</th>
             <th>Work name</th>
-            <th>Skill</th>
+            <th>Matching Skill</th>
+            <th>Not Matching Skill</th>
             <th>Price</th>
-            <td>Action</td>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <% if !@works.nil?
-          @works.each_with_index do |work, index| %>
+        <% if !@works.nil?%>
+          <%  @works.each_with_index do |work, index| %> 
             <tr>
                 <td><%= index+1 %> </td>
-                <td><%= work.user.fullname%> </td>
+                <td><%= work.fullname%> </td>
                 <td><%= work.name %></td>
-                <td><%= work.categories.name  %> </td>
+                <td><%= work.match_num  %> </td>
+                <td><%= work.not_match_num  %> </td>
                 <td><%= work.price %> $</td>
-                <td><%= link_to 'View detail', '/works/'+(work.id.to_s), class: "btn btn-lg btn-primary" %></td>
-              </tr>
-            <% end
-          end%>
-      </tbody>
-  </table>
+                <td>
+                    <%= link_to 'View detail', works_path(work), class: "btn btn-default"  %>
+                      <%= if work.not_match_num == 0
+                        link_to 'Join in', '#',  class: "btn btn-primary" 
+                          elsif work.not_match_num == 1
+                          link_to 'Join in', '#', class: "btn btn-warning"
+                            else 
+                            link_to 'Join in', '#', class: "btn btn-danger"
+                              end %></td>
+                    </tr>
+                  <% end
+                else
+              %>
+                <%  end%>
+            </tbody>
+        </table>
