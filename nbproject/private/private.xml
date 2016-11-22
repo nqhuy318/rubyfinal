@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-<<<<<<< HEAD
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
-=======
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/models/review_freelancer.rb</file>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/controllers/search_works_controller.rb</file>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/models/work.rb</file>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/models/freelancer_category.rb</file>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/models/joiner.rb</file>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/models/user.rb</file>
+            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/views/users/show.html.erb</file>
+            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/config/routes.rb</file>
+            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/views/works/show.html.erb</file>
+            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/controllers/works_controller.rb</file>
+            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/views/works/index.html.erb</file>
         </group>
->>>>>>> 03daf97c98930b6552003010aeea46a1483c0f21
     </open-files>
 </project-private>
