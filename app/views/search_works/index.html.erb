@@ -1,39 +1,49 @@
-<h1></h1>
-<table class="table table-hover table-border">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Hoster</th>
-            <th>Work name</th>
-            <th>Matching Skill</th>
-            <th>Not Matching Skill</th>
-            <th>Price</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% if !@works.nil?%>
-          <%  @works.each_with_index do |work, index| %> 
-            <tr>
-                <td><%= index+1 %> </td>
-                <td><%= work.fullname%> </td>
-                <td><%= work.name %></td>
-                <td><%= work.match_num  %> </td>
-                <td><%= work.not_match_num  %> </td>
-                <td><%= work.price %> $</td>
-                <td>
-                    <%= link_to 'View detail', works_path(work), class: "btn btn-default"  %>
-                      <%= if work.not_match_num == 0
-                        link_to 'Join in', '#',  class: "btn btn-primary" 
-                          elsif work.not_match_num == 1
-                          link_to 'Join in', '#', class: "btn btn-warning"
-                            else 
-                            link_to 'Join in', '#', class: "btn btn-danger"
-                              end %></td>
-                    </tr>
-                  <% end
-                else
-              %>
-                <%  end%>
-            </tbody>
-        </table>
+<%= form_tag(search_works_path, :method => "post") do %>
+  <% @categories.each do |category| %>
+    <%= category.name %>
+    <%= check_box_tag 'category_ids[]', category.id, class: 'form-control' %>
+    <% end %>
+    <%= submit_tag "Search" %>
+  <% end %>
+  <center>
+      <h2>List works</h2>
+  </center>
+  <hr/>
+  <table class="table table-hover table-border">
+      <thead>
+          <tr>
+              <th>#</th>
+              <th>Customer</th>
+              <th>Work name</th>
+              <th>Matching Skill</th>
+              <th>Not Matching Skill</th>
+              <th>Price</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% if !@works.nil?%>
+            <%  @works.each_with_index do |work, index| %> 
+              <tr>
+                  <td><%= index+1 %> </td>
+                  <td><%= work.fullname%> </td>
+                  <td><%= work.name %></td>
+                  <td><%= work.match_num  %> </td>
+                  <td><%= work.not_match_num  %> </td>
+                  <td><%= work.price %> $</td>
+                  <td>
+                      <%= link_to 'View detail', work_path(work), class: "btn btn-default"  %>
+                        <%= if work.not_match_num == 0
+                          link_to 'Join in', '#',  class: "btn btn-primary" 
+                            elsif work.not_match_num == 1
+                            link_to 'Join in', '#', class: "btn btn-warning", data: { confirm: 'Are you sure?' }
+                              else 
+                              link_to 'Join in', '#', class: "btn btn-danger", data: { confirm: 'Are you sure?'}
+                                end %></td>
+                      </tr>
+                    <% end
+                    else
+                  %>
+                  <%  end%>
+              </tbody>
+          </table>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   get 'search_works/index'
   get 'search_works', to: 'search_works#index'
+  post 'search_works', to: 'search_works#advance'
   
   get 'sessions/new'
   post   '/login',   to: 'sessions#create'
