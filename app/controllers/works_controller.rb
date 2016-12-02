@@ -28,6 +28,9 @@ class WorksController < ApplicationController
     @work.category_ids = params[:category_ids]
     @work.user = @user
     if @user[:role_id] == 2&&@work.save
+    @work.user = @user
+    end
+    if @work.save
       flash[:success] = "Project created"
       redirect_to @work
     else
