@@ -1,0 +1,7 @@
+
+<% @tests.each do |q| %>
+<%= q.question %>:<% q.answers.each do |a| %>
+<%= a.answer  %>
+<% end %>
+<br/>
+<%end%>
