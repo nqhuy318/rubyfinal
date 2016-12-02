@@ -9,6 +9,7 @@ class WorksController < ApplicationController
       @work = Work.joins(:categories).distinct.find(params[:id])
       render 'joiners/new'
     end
+    @work = Work.find(params[:id])
   end
 
   def new

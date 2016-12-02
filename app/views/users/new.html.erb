@@ -3,28 +3,36 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-   <%= form_for(@user, url: signup_path) do |f| %>
+   <%= form_tag(users_path, :method => 'POST') do %>
     <%= render 'shared/error_messages' %>
 
-      <%= f.label :fullname %>
-      <%= f.text_field :fullname, class: 'form-control' %>
+      <%= label_tag :fullname %>
+      <%= text_field_tag :fullname %>
 
-      <%= f.label :username %>
-      <%= f.text_field :username, class: 'form-control' %>
+      <%= label_tag :username %>
+      <%= text_field_tag :username %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+      <%= label_tag :email %>
+      <%= email_field_tag :email %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
 
-      <%= f.label :password_confirmation, "Password Confirmation" %>	
-      <%= f.password_field :password_confirmation, class: 'form-control'%>
+      <%= label_tag :password_confirmation, "Password Confirmation" %>	
+      <%= password_field_tag :password_confirmation%>
 
-      
+      <%= label_tag :role_id, 'Freelancer' %>
+      <%= radio_button_tag :role_id, '1' %> 
+      <%= label_tag :role_id, 'Customer' %>
+      <%= radio_button_tag :role_id, '2' %>
 
+      <h2>Chose your skill</h2>
+      <% Category.all.each do |category| %>
+            <%= category.name %>
+            <%= check_box_tag 'category_ids[]', category.id, false, class: 'form-control' %>
+            <% end %>
 
-      <%= f.submit "Create my account", class: "btn btn-primary" %>
+      <%= submit_tag "Create my account", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
