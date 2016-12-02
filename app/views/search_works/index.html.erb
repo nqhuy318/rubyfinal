@@ -15,8 +15,7 @@
               <th>#</th>
               <th>Customer</th>
               <th>Work name</th>
-              <th>Matching Skill</th>
-              <th>Not Matching Skill</th>
+              <th>Skill</th>
               <th>Price</th>
               <th>Action</th>
           </tr>
@@ -26,20 +25,21 @@
             <%  @works.each_with_index do |work, index| %> 
               <tr>
                   <td><%= index+1 %> </td>
-                  <td><%= work.fullname%> </td>
+                  <td><%= work.user.fullname%> </td>
                   <td><%= work.name %></td>
-                  <td><%= work.match_num  %> </td>
-                  <td><%= work.not_match_num  %> </td>
-                  <td><%= work.price %> $</td>
                   <td>
+                      <% work.categories.each do |category| %>
+                        <% if @categories.include? category  %>
+                          <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
+                          <% else %>
+                            <%=  link_to category.name, 'javascript:;', class: "btn btn-danger" %>
+                            <%  end %>
+                          <% end %>
+                      </td>
+                      <td><%= work.price %> $</td>
+                      <td>
                       <%= link_to 'View detail', work_path(work), class: "btn btn-default"  %>
-                        <%= if work.not_match_num == 0
-                          link_to 'Join in', '#',  class: "btn btn-primary" 
-                            elsif work.not_match_num == 1
-                            link_to 'Join in', '#', class: "btn btn-warning", data: { confirm: 'Are you sure?' }
-                              else 
-                              link_to 'Join in', '#', class: "btn btn-danger", data: { confirm: 'Are you sure?'}
-                                end %></td>
+                        <%= link_to 'Join in', '', class: "btn btn-primary" %></td>
                       </tr>
                     <% end
                     else

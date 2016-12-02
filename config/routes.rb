@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'joiners/new'
+
+  get 'joiners/edit'
+
+  get 'joiners/delete'
+
 #  get 'works', to: 'works#index'
 #  get '/works/new', to: 'works#new'
 #  post '/works/new', to: 'works#create'
@@ -21,5 +27,6 @@ Rails.application.routes.draw do
 
   resources :users
   resources :works
+  resources :joiners
 
 end 
