@@ -89,7 +89,6 @@ class SearchWorksController < ApplicationController
     end
     render 'index'
   end
-
   def check_match(user_categories, *work_categories)
     count = 0
     work_categories.each {
