@@ -2,12 +2,18 @@ class JoinersController < ApplicationController
   def create
     @joiner = Joiner.new(joiner_params)
     @joiner.status = 0
-    if @joiner.save
-      flash[:success] = "Success!"
-      redirect_to "/search_works"
+    check = Joiner.where(user_id: @joiner.user_id, work_id:@joiner.work_id)
+    if check.empty?
+      if @joiner.save
+        flash[:success] = "Success!"
+        redirect_to "/search_works"
+      else
+        flash[:danger] = "Fail!"
+        render 'joiners/new'
+      end
     else
-      flash[:danger] = "Fail!"
-      render 'joiner/new'
+      flash[:danger] = "You have joined in this work!"
+      redirect_to "/search_works"
     end
   end
 

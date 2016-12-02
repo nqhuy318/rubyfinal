@@ -20,10 +20,10 @@
                 Price:
             </h1>
             <%= @work.price %>
-            <%= form_for(joiners_path, :method => 'POST') do  %>
-              <%= hidden_field_tag :work, :value =>@work.id %>
-              <%= hidden_field_tag :user, :value =>current_user[:id] %>
-              <%= submit_tag "Join work", class: "btn btn-primary col-md-3" %>
+            <%= form_for(@joiner, url: joiners_path) do |f|  %>
+              <%= f.hidden_field :work_id, :value =>@work.id %>
+              <%= f.hidden_field :user_id, :value =>current_user[:id] %>
+              <%= f.submit "Join work", class: "btn btn-primary col-md-3" %>
               <% end %>
           </section>
 
