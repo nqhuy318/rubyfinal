@@ -1,7 +1,13 @@
 class WorksController < ApplicationController
 
   def show
-    @work = Work.joins(:categories).distinct.find(params[:id])
+    @user = current_user
+    if(@user[:role_id] == 2)
+      @work = Work.joins(:categories).distinct.find(params[:id])
+    elsif(@user[:role_id] == 1)
+      @work = Work.joins(:categories).distinct.find(params[:id])
+      render 'joiners/new'
+    end
   end
 
   def new
@@ -28,7 +34,7 @@ class WorksController < ApplicationController
     @work.category_ids = params[:category_ids]
     @work.user = @user
     if @user[:role_id] == 2&&@work.save
-    @work.user = @user
+      @work.user = @user
     end
     if @work.save
       flash[:success] = "Project created"

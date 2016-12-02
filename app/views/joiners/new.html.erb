@@ -1,2 +1,33 @@
-<h1>Joiners#new</h1>
-<p>Find me in app/views/joiners/new.html.erb</p>
+<% provide(:title, @work.name) %>
+<div class="row">
+    <aside class="col-md-4">
+        <section class="work_info">
+            <h1>
+                Name:
+            </h1>
+            <%= @work.name %>
+            <h1>
+                Skill Require:
+            </h1>
+            <% @work.categories.each do |category| %>
+              <%= category.name %>
+            <%  end %>
+            <h1>
+                Description:
+            </h1>
+            <%= @work.description %>
+            <h1>
+                Price:
+            </h1>
+            <%= @work.price %>
+            <%= form_for(joiners_path, :method => 'POST') do  %>
+              <%= hidden_field_tag :work, :value =>@work.id %>
+              <%= hidden_field_tag :user, :value =>current_user[:id] %>
+              <%= submit_tag "Join work", class: "btn btn-primary col-md-3" %>
+              <% end %>
+          </section>
+
+      </aside>
+
+  </div>
+

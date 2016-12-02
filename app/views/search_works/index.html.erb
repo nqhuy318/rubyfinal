@@ -38,12 +38,11 @@
                       </td>
                       <td><%= work.price %> $</td>
                       <td>
-                      <%= link_to 'View detail', work_path(work), class: "btn btn-default"  %>
-                        <%= link_to 'Join in', '', class: "btn btn-primary" %></td>
-                      </tr>
-                    <% end
-                    else
-                  %>
-                  <%  end%>
-              </tbody>
-          </table>
+                          <%= link_to 'View detail', work_path(work), class: "btn btn-default"  %></td>
+                    </tr>
+                  <% end
+                  else
+                %>
+                <%  end%>
+            </tbody>
+        </table>

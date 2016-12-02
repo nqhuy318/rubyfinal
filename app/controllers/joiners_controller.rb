@@ -1,12 +1,13 @@
 class JoinersController < ApplicationController
   def create
     @joiner = Joiner.new(joiner_params)
+    @joiner.status = 0
     if @joiner.save
       flash[:success] = "Success!"
-#      redirect_to @work
+      redirect_to "/search_works"
     else
       flash[:danger] = "Fail!"
-#      render 'new'
+      render 'joiner/new'
     end
   end
 
@@ -32,6 +33,6 @@ class JoinersController < ApplicationController
   private
 
   def joiner_params
-    params.require(:joiner).permit(:user_id, :work_id, :status)
+    params.require(:joiner).permit(:user_id, :work_id)
   end
 end
