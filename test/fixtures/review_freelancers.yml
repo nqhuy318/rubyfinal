@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyString
+  rank: 1.5
+  work: one
+  joiner: one
+
+two:
+  content: MyString
+  rank: 1.5
+  work: two
+  joiner: two

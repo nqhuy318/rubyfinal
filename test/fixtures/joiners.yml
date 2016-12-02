@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  work: one
+  joined_date: 2016-11-19
+
+two:
+  user: two
+  work: two
+  joined_date: 2016-11-19

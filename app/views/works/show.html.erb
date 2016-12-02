@@ -1,0 +1,26 @@
+<% provide(:title, @work.name) %>
+
+  <div class="row">
+      <aside class="col-md-4">
+          <section class="work_info">
+              <h1>
+                  Name:
+              </h1>
+              <%= @work.name %>
+              <h1>
+                  Skill Require:
+              </h1>
+              <% @work.categories.each do |category| %>
+                          <%= category.name %>
+                          <%  end %>
+              <h1>
+                  Description:
+              </h1>
+              <%= @work.description %>
+              <h1>
+                  Price:
+              </h1>
+              <%= @work.price %>
+          </section>
+      </aside>
+  </div>
