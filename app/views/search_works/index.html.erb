@@ -1,0 +1,49 @@
+<%= form_tag(search_works_path, :method => "post") do %>
+  <% @categories.each do |category| %>
+    <%= category.name %>
+    <%= check_box_tag 'category_ids[]', category.id, class: 'form-control' %>
+    <% end %>
+    <%= submit_tag "Search" %>
+  <% end %>
+  <center>
+      <h2>List works</h2>
+  </center>
+  <hr/>
+  <table class="table table-hover table-border">
+      <thead>
+          <tr>
+              <th>#</th>
+              <th>Customer</th>
+              <th>Work name</th>
+              <th>Skill</th>
+              <th>Price</th>
+              <th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% if !@works.nil?%>
+            <%  @works.each_with_index do |work, index| %> 
+              <tr>
+                  <td><%= index+1 %> </td>
+                  <td><%= work.user.fullname%> </td>
+                  <td><%= work.name %></td>
+                  <td>
+                      <% work.categories.each do |category| %>
+                        <% if @categories.include? category  %>
+                          <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
+                          <% else %>
+                            <%=  link_to category.name, 'javascript:;', class: "btn btn-danger" %>
+                            <%  end %>
+                          <% end %>
+                      </td>
+                      <td><%= work.price %> $</td>
+                      <td>
+                          <%= link_to 'View detail', work_path(work), class: "btn btn-default"  %>
+                      </td>
+                    </tr>
+                  <% end
+                  else
+                %>
+                <%  end%>
+            </tbody>
+        </table>
