@@ -9,6 +9,7 @@ class WorksController < ApplicationController
       @work = Work.joins(:categories).distinct.find(params[:id])
       render 'joiners/new'
     end
+    @work = Work.find(params[:id])
   end
 
   def new
@@ -40,9 +41,6 @@ class WorksController < ApplicationController
     if @work.save
       flash[:success] = "Project created"
       redirect_to @work
-    else
-      flash[:danger] = "Cannot create"
-      render 'new'
     end
   end
 
@@ -59,6 +57,7 @@ class WorksController < ApplicationController
       render 'edit'
     end
   end
+
 
   def destroy
     Work.find(params[:id]).destroy
