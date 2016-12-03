@@ -6,20 +6,20 @@
    <%= form_tag(users_path, :method => 'POST', :remote => true) do %>
     <%= render 'shared/error_messages' %>
 
-      <%= label_tag :fullname %>
-      <%= text_field_tag :fullname %>
+          <%= label_tag :fullname %>
+          <%= text_field_tag :fullname %>
 
-      <%= label_tag :username %>
-      <%= text_field_tag :username %>
+          <%= label_tag :username %>
+          <%= text_field_tag :username %>
 
-      <%= label_tag :email %>
-      <%= email_field_tag :email %>
+          <%= label_tag :email %>
+          <%= email_field_tag :email %>
 
-      <%= label_tag :password %>
-      <%= password_field_tag :password %>
+          <%= label_tag :password %>
+          <%= password_field_tag :password %>
 
-      <%= label_tag :password_confirmation, "Password Confirmation" %>	
-      <%= password_field_tag :password_confirmation%>
+          <%= label_tag :password_confirmation, "Password Confirmation" %>	
+          <%= password_field_tag :password_confirmation%>
 
       <%= label_tag :role_id, 'Freelancer' %>
       <%= radio_button_tag :role_id_freelancer, '1' %> 
@@ -34,3 +34,4 @@
 <script type="text/javascript">$("#role_id_freelancer").bind("click", function() {
   get data, send ajax});
  </script>
+

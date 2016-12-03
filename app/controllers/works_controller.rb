@@ -34,6 +34,7 @@ class WorksController < ApplicationController
   def create
     @user = current_user
     @work = Work.new(work_params)
+    @work.status = 0
     @work.category_ids = params[:category_ids]
     @work.user = @user
     @work.status = 0

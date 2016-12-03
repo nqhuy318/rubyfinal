@@ -1,5 +1,12 @@
 <h2>Chose your skill</h2>
+<<<<<<< HEAD
       <% Category.all.each do |category| %>
             <%= category.name %>
             <%= check_box_tag 'category_ids[]', category.id, false, class: 'form-control' %>
             <% end %>
+=======
+<% Category.all.each do |category| %>
+  <%= category.name %>
+  <%= check_box_tag 'category_ids[]', category.id, false, class: 'form-control' %>
+  <% end %>
+>>>>>>> 9cb10acfeb23fb1f6b3e39ee3e3650b6a606ced8
