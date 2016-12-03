@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  get 'take_test/index/:id', to:'take_test#index'
+  get 'categories/index'
 
+  get 'category/index'
+
+  get 'take_test/index/:id', to:'take_test#index'
+  post 'take_test/index/:id', to:'take_test#create'
+  
   get 'joiners/new'
 
   get 'joiners/edit'
@@ -30,4 +35,5 @@ Rails.application.routes.draw do
   resources :users
   resources :works
   resources :joiners
+  resources :categories
 end
