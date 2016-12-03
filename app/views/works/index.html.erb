@@ -22,7 +22,7 @@
                 <td><%= work.name %></td>
                 <td><% work.categories.each do |category| %>
                           <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
-                          <%  end %>
+                    <%  end %>
                 </td>
                 <td><%= work.user.username %></td>
                 <td><%= work.description %></td>
@@ -35,8 +35,8 @@
                     <%=  link_to 'Show', work_path(work), class: 'btn btn-primary' %>
                       <%=  link_to 'Edit', edit_work_path(work), class: 'btn btn-warning' %>
                         <%=  link_to 'Delete',  work, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-
                     </td>
-                </tbody>
-            </table>
           <% end %>
+      </tbody>
+  </table>
+<% end %>
