@@ -34,9 +34,10 @@ class WorksController < ApplicationController
   def create
     @user = current_user
     @work = Work.new(work_params)
+    @work.status = 0
     @work.category_ids = params[:category_ids]
     @work.user = @user
-    if @user[:role_id] == 2&&@work.save
+    if @user[:role_id] == 2 && @work.save
       @work.user = @user
     end
     if @work.save

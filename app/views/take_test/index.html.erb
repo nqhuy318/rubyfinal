@@ -1,0 +1,35 @@
+<div class="row">
+    <center>
+        <h3>Skill test</h3>
+    </center>
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+        <%= form_tag('', :method => 'POST', remote: true) do %>
+          <% @tests.each_with_index do |q, q_index| %>
+        <h4>Question<%= q_index+1%>: <%= q.question %></h4>
+            <% q.answers.each_with_index do |a, a_index| %>
+              <%if a_index == 0%><%= radio_button_tag q_index, a.id %>A.
+              <%elsif a_index == 1%><%= radio_button_tag q_index, a.id %>B.
+              <%elsif a_index == 2%><%= radio_button_tag q_index, a.id %>C.
+              <%elsif a_index == 3%><%= radio_button_tag q_index, a.id %>D.
+              <% end %>
+              <%= a.answer  %><br/>
+            <% end %>
+            <br/>
+          <%end%>
+          <%= submit_tag "Submit test", class: "btn btn-primary" %>
+          <% end %>
+      </div>
+  </div>
+  <style>
+      input[type="radio"]{
+          width:20px
+      }
+      input[type="submit"]{
+          width:100px
+      }
+      h4{
+          margin-top: 0px;
+          margin-bottom: 5px
+      }
+  </style>

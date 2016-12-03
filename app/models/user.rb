@@ -4,7 +4,8 @@ class User < ApplicationRecord
   
   has_many :freelancer_categories
   has_many :categories, through: :freelancer_categories
-  
+
+  accepts_nested_attributes_for  :freelancer_categories
   before_save { email.downcase! }
   validates :username,  presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
