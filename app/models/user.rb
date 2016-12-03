@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 
   has_many :works, dependent: :destroy
-  
+  belongs_to :role
   has_many :freelancer_categories
   has_many :categories, through: :freelancer_categories
 

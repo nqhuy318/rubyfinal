@@ -23,6 +23,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.joins(:role).where('id' =>params[:id]).first
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @work.update_attributes(work_params)
+      flash[:success] = "Profile updated!"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+  
   private
   def user_params
     params.permit(:fullname, :username, :email, :password, :password_confirmation, :role_id)

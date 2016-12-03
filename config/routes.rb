@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   
   get 'joiners/new'
 
- # get 'joiners/edit'
+  # get 'joiners/edit'
 
   get 'joiners/delete'
 
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'
   get    '/login',   to: 'sessions#new'
-
+  get '/edit/:id', to: 'users#edit'
   resources :users
   resources :works
   resources :joiners

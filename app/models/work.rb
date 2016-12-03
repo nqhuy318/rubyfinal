@@ -6,6 +6,6 @@ class Work < ApplicationRecord
 #  accepts_nested_attributes_for :work_categories
   has_many :joiners
   has_many :users, through: :joiners
-  has_one :review_category
+  has_many :review_freelancer, through: :joiners
 
 end
