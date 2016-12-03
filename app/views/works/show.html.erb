@@ -1,4 +1,3 @@
-
 <% provide(:title, @work.name) %>
 
   <div class="row">
@@ -22,7 +21,45 @@
                   Price:
               </h1>
               <%= @work.price %>
+
+              <h1>List of joiners</h1>
+              <table class="table table-border table-hover">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Joiner's name</th> 
+                    <th>Skill Required</th>
+                    <th>Review</th>
+                    <th>Options</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @work.joiners.where(status:0).each do |join|  %>
+                    <tr>
+                      <td><%= join.id %></td>
+                      <td><%= join.user.fullname %></td>
+                      <td><% @work.categories.each do |category| %>
+                          <%=  category.name %>
+                          <%  end %>
+                      </td>
+                      <td>'#'</td>
+                      <td>
+                        <%=  link_to 'Show', user_path(join.id), class: 'btn btn-primary' %>
+                        <% if !@joiner.nil?%>
+                        <%= form_for(@joiner, url: joiner_path(join), html: {method: "Patch"}) do |f|  %>
+                          <%= f.hidden_field :joiner_id, :value =>@joiner.id %>
+                          <%= f.submit "Accept", class: "btn btn-primary" %>
+                          <% end %>
+                        <% end %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              <%= form_for(@work, html: {method: "Put"}) do |f| %>
+                <%= f.hidden_field :work_status, :value =>@work.status %>
+                <%= f.submit "Start", class: "btn-primary" %>
+              <% end %>
           </section>
       </aside>
   </div>
-

@@ -18,14 +18,15 @@ class JoinersController < ApplicationController
   end
 
   def edit
-    @joiner = Joiner.find(params[:id])
+    
   end
 
   def update
     @joiner = Joiner.find(params[:id])
-    if @joiner.update_attributes(work_params)
+    @joiner.status = 1
+    if @joiner.update_attributes(joiner_params)
       flash[:success] = "Success!"
-      #      redirect_to @work
+      redirect_to @joiner
     else
       render 'edit'
     end

@@ -3,6 +3,7 @@ class WorksController < ApplicationController
   def show
     @user = current_user
     if(@user[:role_id] == 2)
+      @joiner = Joiner.new;
       @work = Work.joins(:categories).distinct.find(params[:id])
     elsif(@user[:role_id] == 1)
       @joiner = Joiner.new;
@@ -35,6 +36,7 @@ class WorksController < ApplicationController
     @work = Work.new(work_params)
     @work.category_ids = params[:category_ids]
     @work.user = @user
+    @work.status = 0
     if @user[:role_id] == 2&&@work.save
       @work.user = @user
     end
@@ -53,9 +55,10 @@ class WorksController < ApplicationController
 
   def update
     @work = Work.find(params[:id])
+    @work.status = 1
     if @work.update_attributes(work_params)
       flash[:success] = "Project updated!"
-      redirect_to @work
+      redirect_to '/works'
     else
       render 'edit'
     end

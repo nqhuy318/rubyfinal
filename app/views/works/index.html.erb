@@ -11,6 +11,7 @@
               <th>Customer</th>
               <th>Description</th>
               <th>Price</th>
+              <th>Status</th>
               <th>Options</th>
           </tr>
       </thead>
@@ -26,6 +27,10 @@
                 <td><%= work.user.username %></td>
                 <td><%= work.description %></td>
                 <td><%= work.price %></td>
+                <td><% if work.status == 1 %>
+                      <%= "Stated" %>
+                    <% end %>
+                </td>
                 <td>
                     <%=  link_to 'Show', work_path(work), class: 'btn btn-primary' %>
                       <%=  link_to 'Edit', edit_work_path(work), class: 'btn btn-warning' %>
