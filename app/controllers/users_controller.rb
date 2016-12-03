@@ -9,20 +9,22 @@ class UsersController < ApplicationController
   end
 
   def create
-     @user = User.new(user_params)
-     @user.category_ids = params[:category_ids]
-   	 if @user.save
+    @user = User.new(user_params)
+    unless params[:category_ids].nil?
+      @user.category_ids = params[:category_ids]
+    end
+    if @user.save
       log_in @user
       flash[:success] = "Welcome to Freelancer Website!"
       redirect_to @user
     else
+      flash[:danger] = "Cannot create account!"
       render 'new'
     end
   end
 
   private
-
-    def user_params
-      params.permit(:fullname, :username, :email, :password, :password_confirmation, :role_id)
-    end
+  def user_params
+    params.permit(:fullname, :username, :email, :password, :password_confirmation, :role_id)
+  end
 end
