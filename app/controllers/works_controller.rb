@@ -37,7 +37,8 @@ class WorksController < ApplicationController
     @work.status = 0
     @work.category_ids = params[:category_ids]
     @work.user = @user
-    if @user[:role_id] == 2 && @work.save
+    @work.status = 0
+    if @user[:role_id] == 2&&@work.save
       @work.user = @user
     end
     if @work.save
@@ -55,9 +56,10 @@ class WorksController < ApplicationController
 
   def update
     @work = Work.find(params[:id])
+    @work.status = 1
     if @work.update_attributes(work_params)
       flash[:success] = "Project updated!"
-      redirect_to @work
+      redirect_to '/works'
     else
       render 'edit'
     end

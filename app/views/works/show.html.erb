@@ -34,7 +34,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% Joiner.all.each do |join|  %>
+                  <% @work.joiners.where(status:0).each do |join|  %>
                     <tr>
                       <td><%= join.id %></td>
                       <td><%= join.user.fullname %></td>
@@ -44,7 +44,7 @@
                       </td>
                       <td>'#'</td>
                       <td>
-                        <%=  link_to 'Show', '#', class: 'btn btn-primary' %>
+                        <%=  link_to 'Show', user_path(join.id), class: 'btn btn-primary' %>
                         <% if !@joiner.nil?%>
                         <%= form_for(@joiner, url: joiner_path(join), html: {method: "Patch"}) do |f|  %>
                           <%= f.hidden_field :joiner_id, :value =>@joiner.id %>
@@ -56,6 +56,10 @@
                   <% end %>
                 </tbody>
               </table>
+              <%= form_for(@work, html: {method: "Put"}) do |f| %>
+                <%= f.hidden_field :work_status, :value =>@work.status %>
+                <%= f.submit "Start", class: "btn-primary" %>
+              <% end %>
           </section>
       </aside>
   </div>
