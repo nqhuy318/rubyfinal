@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'joiners/new'
 
-  get 'joiners/edit'
+ # get 'joiners/edit'
 
   get 'joiners/delete'
 

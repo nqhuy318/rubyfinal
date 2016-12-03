@@ -3,6 +3,7 @@ class WorksController < ApplicationController
   def show
     @user = current_user
     if(@user[:role_id] == 2)
+      @joiner = Joiner.new;
       @work = Work.joins(:categories).distinct.find(params[:id])
     elsif(@user[:role_id] == 1)
       @joiner = Joiner.new;
