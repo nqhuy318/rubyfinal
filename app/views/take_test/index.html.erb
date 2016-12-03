@@ -8,6 +8,10 @@
           <% @tests.each_with_index do |q, q_index| %>
         <h4>Question<%= q_index+1%>: <%= q.question %></h4>
             <% q.answers.each_with_index do |a, a_index| %>
+              <%if a_index == 0%><%= radio_button_tag q_index, a.id %>A.
+              <%elsif a_index == 1%><%= radio_button_tag q_index, a.id %>B.
+              <%elsif a_index == 2%><%= radio_button_tag q_index, a.id %>C.
+              <%elsif a_index == 3%><%= radio_button_tag q_index, a.id %>D.
               <% end %>
               <%= a.answer  %><br/>
             <% end %>
