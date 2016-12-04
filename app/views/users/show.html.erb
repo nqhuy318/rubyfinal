@@ -5,34 +5,23 @@
             <h1>
                 <%= gravatar_for @user %>
                 <%= @user.username %>
+                <%= "Fullname:" %> <%= current_user.fullname %><br>
+                <%= "Gender:" %> <%= current_user.gender %><br>
+                <%= "Contact:" %> <%= current_user.contact %>
             </h1>
         </section>
     </aside>
-  </div>
-  <% unless @join.empty? %>
-    <h2>List of works joined</h2>
-    <table class="table table-border table-hover">
-        <thead>
-            <tr>
-                <th>Work's name</th>
-                <th>Skill Require</th>
-                <th>Customer's name</th>
-                <th>Work's price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @join.each do |f|  %>
-              <tr>
-                  <td><%=  link_to f.work.name, work_path(f.work) %></td>
-                  <td>
-                      <% f.categories.each do |category| %>
-                        <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
-                        <%  end %>
-                    </td>
-                    <td><%= link_to f.work.user.fullname, user_path(f.work.user)   %></td>
-                    <td><%= f.work.price %></td>
-                </tr>
-              <% end %>
-          </tbody>
-      </table>
-    <% end %>
+</div>
+<% unless @join.empty? %>
+  <h2>List of works joined</h2>
+  <table class="table table-border table-hover">
+      <thead>
+          <tr>
+              <th>Work's name</th>
+              <th>Skill Require</th>
+              <th>Customer's name</th>
+              <th>Work's price</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% @join.each do |f|  %>
