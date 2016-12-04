@@ -1,9 +1,14 @@
-<h2>Chose your skill</h2>
+<center>
+    <h3>Chose your skill</h3>
+</center>
 <% Category.all.each do |category| %>
-  <%= category.name %>
-  <% unless @user.nil? %>
-    <%= check_box_tag 'category_ids[]', category.id , class: 'form-control' %>
-    <%else %>
-      <%= check_box_tag 'category_ids[]', category.id , false, class: 'form-control' %>
-      <%end %>
+  <div class="col-md-6">
+      <%= label_tag '', category.name , class: 'check_box_label'%>
+        <%= check_box_tag 'category_ids[]', category.id , false, class: '' %>
+      </div>
     <% end %>
+    <style>
+        .check_box_label{
+            width: 120px;
+        }
+    </style>

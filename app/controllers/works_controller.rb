@@ -2,15 +2,19 @@ class WorksController < ApplicationController
 
   def show
     @user = current_user
-    if(@user[:role_id] == 2)
-      @joiner = Joiner.new;
-      @work = Work.joins(:categories).distinct.find(params[:id])
-    elsif(@user[:role_id] == 1)
-      @joiner = Joiner.new;
-      @work = Work.joins(:categories).distinct.find(params[:id])
-      render 'joiners/new'
+    unless @user.nil?
+      if(@user[:role_id] == 2)
+        @joiner = Joiner.new;
+        @work = Work.joins(:categories).distinct.find(params[:id])
+#        @work.status+=1
+      elsif(@user[:role_id] == 1)
+        @joiner = Joiner.new;
+        @work = Work.joins(:categories).distinct.find(params[:id])
+        render 'joiners/new'
+      end
+    else
+      redirect_to '/signin'
     end
-    @work = Work.find(params[:id])
   end
 
   def new
@@ -24,7 +28,7 @@ class WorksController < ApplicationController
       redirect_to login_path
     else
       if @user[:role_id] == 2
-        @works = Work.where(user_id: @user.id).joins(:categories).distinct
+        @works = Work.where(user_id: @user.id).joins(:categories).distinct.order("status")
       else
         flash[:warning] = "You don't have permission"
       end
@@ -56,7 +60,7 @@ class WorksController < ApplicationController
 
   def update
     @work = Work.find(params[:id])
-    @work.status = 1
+#    @work.status+=1
     if @work.update_attributes(work_params)
       flash[:success] = "Project updated!"
       redirect_to '/works'

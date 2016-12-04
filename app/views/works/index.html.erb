@@ -1,42 +1,48 @@
 <% provide(:title, 'List of projects') %>
 <% unless @works.nil? %>
   <h1>List of projects</h1>
-   <%=  link_to 'New', new_work_path, class: 'btn btn-primary' %>
-  <table class="table table-border table-hover">
-      <thead>
-          <tr>
-              <th>ID</th>
-              <th>Project's name</th> 
-              <th>Skill Require</th>
-              <th>Customer</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Status</th>
-              <th>Options</th>
-          </tr>
-      </thead>
-      <tbody>
-          <% @works.each do |work|  %>
+  <%=  link_to 'New', new_work_path, class: 'btn btn-primary' %>
+    <table class="table table-border table-hover">
+        <thead>
             <tr>
-                <td><%= work.id %></td>
-                <td><%= work.name %></td>
-                <td><% work.categories.each do |category| %>
-                          <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
-                    <%  end %>
-                </td>
-                <td><%= work.user.username %></td>
-                <td><%= work.description %></td>
-                <td><%= work.price %></td>
-                <td><% if work.status == 1 %>
-                      <%= "Stated" %>
-                    <% end %>
-                </td>
-                <td>
-                    <%=  link_to 'Show', work_path(work), class: 'btn btn-primary' %>
-                      <%=  link_to 'Edit', edit_work_path(work), class: 'btn btn-warning' %>
-                        <%=  link_to 'Delete',  work, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+                <th>ID</th>
+                <th>Project's name</th> 
+                <th>Skill Require</th>
+                <th>Customer</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @works.each do |work|  %>
+              <tr>
+                  <td><%= work.id %></td>
+                  <td><%= work.name %></td>
+                  <td><% work.categories.each do |category| %>
+                        <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
+                        <%  end %>
                     </td>
+                    <td><%= work.user.fullname %></td>
+                    <td><%= work.price %></td>
+                    <td><% if work.status == 1 %>
+                          <%= "Stated" %>
+                        <% elsif work.status == 0 %>
+                          <%= "Waiting" %>
+                        <% elsif work.status == 2 %>
+                          <%= "Done" %>
+                        <% end %>
+                    </td>
+                    <td>
+                        <%=  link_to 'Show', work_path(work), class: 'btn btn-primary' %>
+                          <% if work.status <2 %>
+                            <%=  link_to 'Edit', edit_work_path(work), class: 'btn btn-warning' %>
+                            <% end %>
+                            <% if work.status <1 %>
+                              <%=  link_to 'Delete',  work, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+                              <% end %>
+                          </td>
+                        <% end %>
+                </tbody>
+            </table>
           <% end %>
-      </tbody>
-  </table>
-<% end %>

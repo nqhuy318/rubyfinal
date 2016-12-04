@@ -2,36 +2,83 @@
 <h1>Sign up</h1>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-   <%= form_tag(users_path, :method => 'POST', :remote => true) do %>
-    <%= render 'shared/error_messages' %>
+    <div class="col-md-6 col-md-offset-3">
+        <%= form_tag(users_path, :method => 'POST', :remote => true) do %>
+          <%= render 'shared/error_messages' %>
 
           <%= label_tag :fullname %>
-          <%= text_field_tag :fullname %>
+          <%= text_field_tag :fullname, '',  class: 'form-control' %>
 
-          <%= label_tag :username %>
-          <%= text_field_tag :username %>
+            <%= label_tag :username %>
+            <%= text_field_tag :username, '',  class: 'form-control'%>
 
-          <%= label_tag :email %>
-          <%= email_field_tag :email %>
+              <%= label_tag :email %>
+              <%= email_field_tag :email, '',  class: 'form-control' %>
 
-          <%= label_tag :password %>
-          <%= password_field_tag :password %>
+                <%= label_tag :password %>
+                <%= password_field_tag :password, '',  class: 'form-control' %>
 
-          <%= label_tag :password_confirmation, "Password Confirmation" %>	
-          <%= password_field_tag :password_confirmation%>
+                  <%= label_tag :password_confirmation, "Password Confirmation" %>	
+                  <%= password_field_tag :password_confirmation, '',  class: 'form-control'%>
 
-      <%= label_tag :role_id, 'Freelancer' %>
-      <%= radio_button_tag :role_id_freelancer, '1' %> 
-      <%= label_tag :role_id, 'Customer' %>
-      <%= radio_button_tag :role_id_customer, '2' %>
+                    <div class="row">
+                        <%= label_tag '', 'Gender', class: 'col-md-3'   %>
+                          <div class="col-md-4">
+                              <%= label_tag :gender, 'Male'   %>
+                              <%= radio_button_tag :gender, 'Male', :checked => 1 %>
+                          </div>
+                          <div class="col-md-4">
+                              <%= label_tag :gender, 'Female' %>
+                              <%= radio_button_tag :gender, 'Female' %> 
+                          </div>
+                      </div>
+                      <%= label_tag :contact %>
+                      <%= text_field_tag :contact, '', class: 'form-control' %>
+                        <%= label_tag :info %>
+                        <%= text_area_tag :info, '', class: 'form-control' %>
 
-      <%= submit_tag "Create my account", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
+                          <div class="row">
+                              <%= label_tag '', 'Select type', class: 'col-md-3'  %>
+                                <div class="col-md-4">
+                                    <%= label_tag :role_id, 'Customer'   %>
+                                    <%= radio_button_tag :role_id, '2', :checked => 1 %>
+                                </div>
+                                <div class="col-md-4">
+                                    <%= label_tag :role_id, 'Freelancer' %>
+                                    <%= radio_button_tag :role_id, '1' %> 
+                                </div>
+                            </div>
+                            <div id="list"></div>
+                            <center>
+                                <%= submit_tag "Create my account", class: "btn btn-primary" %>
+                              </center>
+                            <% end %>
+                        </div>
+                    </div>
+                    </div>
 
-<script type="text/javascript">$("#role_id_freelancer").bind("click", function() {
-  get data, send ajax});
- </script>
+                    <script>
+                      $('input:radio[name="role_id"]').change(
+                              function () {
+                                  if ($(this).is(':checked') && $(this).val() === '1') {
+                                      $('#list').html("<%= j render 'users/list'  %> ");
+                                  }
+                                  else {
+                                      $('#list').html("");
+                                  }
+                              });
+                    </script> 
+                    <style>
+                        input[type="checkbox"]{
+                            width:20px
+                        }
+                        input[type="radio"]{
+                            width:20px;
+                    <%#*margin-right: 100px%>
+                        }
+                        input[type="submit"]{
+                            width:200px;
+                            margin-top: 20px;
 
+                        }
+                    </style>
