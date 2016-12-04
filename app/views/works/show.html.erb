@@ -22,50 +22,57 @@
             </h1>
             <%= @work.price %>
 
-            <h1>List of joiners</h1>
-            <table class="table table-border table-hover">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Joiner's name</th> 
-                        <th>Skill Required</th>
-                        <th>Review</th>
-                        <th>Options</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @work.joiners.where(status:0).each do |join|  %>
-                      <tr>
-                          <td><%= join.id %></td>
-                          <td><%= join.user.fullname %></td>
-                          <td><% @work.categories.each do |category| %>
-                                <%=  category.name %>
-                              <%  end %>
+
+            <%= form_for(@work, html: {method: "Patch"}) do |f| %>
+              <%= f.hidden_field :work_status, :value =>@work.status+1 %>
+              <% if @work.status == 0 %>
+                <%= f.submit "Start", class: "btn-primary" %>
+                <%elsif @work.status == 1 %>
+                  <%= f.submit "Finish", class: "btn-primary" %>
+                  <%elsif @work.status == 2 %>
+                    <%= f.label "Finished", class: "btn-primary, disabled" %>
+                    <%end%>
+                  <% end %>
+              </section>
+          </aside>
+      </div>
+      <h1>List of joiners</h1>
+      <table class="table table-border table-hover">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Joiner 's name</th> 
+                  <th>Joiner 's skill</th>
+                  <th>Review</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% @work.joiners.each_with_index do |join, index|  %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%=  link_to join.user.fullname, user_path(join) %></td>
+                    <td><% join.categories.each do |category| %>
+                          <%=  category.name %>
+                        <%  end %>
+                    </td>
+                    <td>'#'</td>
+                    <td>
+        <%#=  link_to 'Show', user_path(join.id), class: 'btn btn-primary' %>
+                        <% if join.status == 0%>
+                          <%= form_for(@joiner, url: joiner_path(join), html: {method: "Patch"}) do |f|  %>
+                            <%= f.hidden_field :joiner_id, :value =>@joiner.id %>
+                            <%= f.submit "Accept", class: "btn btn-primary col-md-6" %>
+                            <% end %>
+                            <%= form_for(@joiner, url: joiner_path(join), html: {method: "Delete"}) do |d|  %>
+                              <%= d.hidden_field :joiner_id, :value =>@joiner.id %>
+                              <%= d.submit "Delete", class: "btn btn-danger col-md-6" %>
+                              <% end %>
+                            <% else  %>
+                              <%= label '', 'Joined', class: "btn btn-default, disable" %>
+                              <% end %>
                           </td>
-                          <td>'#'</td>
-                          <td>
-                              <%=  link_to 'Show', user_path(join.id), class: 'btn btn-primary' %>
-                                <% if !@joiner.nil?%>
-                                  <%= form_for(@joiner, url: joiner_path(join), html: {method: "Patch"}) do |f|  %>
-                                    <%= f.hidden_field :joiner_id, :value =>@joiner.id %>
-                                    <%= f.submit "Accept", class: "btn btn-primary" %>
-                                    <% end %>
-                                  <% end %>
-                              </td>
-                          </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-                <%= form_for(@work, html: {method: "Patch"}) do |f| %>
-                  <%= f.hidden_field :work_status, :value =>@work.status+1 %>
-                  <% if @work.status == 0 %>
-                    <%= f.submit "Start", class: "btn-primary" %>
-                    <%elsif @work.status == 1 %>
-                      <%= f.submit "Finish", class: "btn-primary" %>
-                      <%elsif @work.status == 2 %>
-                        <%= f.label "Finished", class: "btn-primary, disabled" %>
-                        <%end%>
-                      <% end %>
-                  </section>
-              </aside>
-          </div>
+                      </tr>
+                    <% end %>
+                </tbody>
+            </table>

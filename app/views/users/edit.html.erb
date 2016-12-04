@@ -6,20 +6,37 @@
           <%= render 'shared/error_messages' %>
 
           <%= label_tag :fullname %>
-          <%= text_field_tag :fullname, @user.fullname %>
+          <%= text_field_tag :fullname, @user.fullname, class: 'form-control' %>
 
-          <%= label_tag :email %>
-          <%= email_field_tag :email, @user.email %>
+            <%= label_tag :email %>
+            <%= email_field_tag :email, @user.email, class: 'form-control' %>
 
-          <%= label_tag :role_id, @user.role.name%>
-          <div id="list"></div>
+              <div class="row">
+                  <%= label_tag '', 'Gender', class: 'col-md-3'   %>
+                    <div class="col-md-4">
+                        <%= label_tag :gender, 'Male'   %>
+                        <%= radio_button_tag :gender, 'Male', :checked => 1 %>
+                    </div>
+                    <div class="col-md-4">
+                        <%= label_tag :gender, 'Female' %>
+                        <%= radio_button_tag :gender, 'Female' %> 
+                    </div>
+                </div>
+                <%= label_tag :contact %>
+                <%= text_field_tag :contact, '', class: 'form-control' %>
+                  <%= label_tag :info %>
+                  <%= text_area_tag :info, '', class: 'form-control' %>
 
-          <%= submit_tag "Create my account", class: "btn btn-primary" %>
-          <% end %>
-      </div>
-  </div>
-  <script>
-  <% if @user.role.id == 1 %>
-      $('#list').html("<%= j render 'users/list'  %> ");
-  <% end %>
-  </script>
+                    <%= label_tag :role_id, 'Your are a '+@user.role.name%>
+                    <div id="list"></div>
+                    <center>
+                        <%= submit_tag "Create my account", class: "btn btn-primary" %>
+                      </center>
+                    <% end %>
+                </div>
+            </div>
+            <script>
+            <% if @user.role.id == 1 %>
+                $('#list').html("<%= j render 'users/list'  %> ");
+            <% end %>
+            </script>

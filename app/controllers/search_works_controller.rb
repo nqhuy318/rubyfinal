@@ -7,7 +7,7 @@ class SearchWorksController < ApplicationController
     else
       if @user[:role_id] == 1
         @categories = Category.joins(:freelancer_categories).where(freelancer_categories:{user_id: @user[:id]})
-        @works = Work.joins(:categories, :user).left_outer_joins(:joiners).where(status:0, categories:{id: @categories}, joiners:{}).distinct
+        @works = Work.joins(:categories, :user).left_outer_joins(:joiners).where(status:0, categories:{id: @categories}).distinct
         @works = @works.sort do |a, b|
           case
           when check_not_match(@categories, a.categories) < check_not_match(@categories, b.categories)

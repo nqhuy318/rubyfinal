@@ -17,10 +17,6 @@ class JoinersController < ApplicationController
     end
   end
 
-  def edit
-    
-  end
-
   def update
     @joiner = Joiner.find(params[:id])
     @joiner.status = 1
@@ -33,8 +29,8 @@ class JoinersController < ApplicationController
   end
 
   def destroy
-    Joiner.find(params[:id]).destroy
-    #    redirect_to '/works'
+    joiner = Joiner.find(params[:id]).destroy
+    redirect_to work_path(joiner.work)
   end
   
   private

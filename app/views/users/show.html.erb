@@ -1,37 +1,38 @@
 <% provide(:title, @user.username) %>
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.username %>
-      </h1>
-    </section>
-  </aside>
-  <% if (current_user.role_id == 2) %>
-    <%=  link_to 'View works', works_path, class: 'btn btn-primary' %>
-  <% end %>
-</div>
-<% if (current_user.role_id == 1) %>
-<h2>List of works joined</h2>
-	<table class="table table-border table-hover">
-			<tr>
-				<th>Work's name</th>
-				<th>Skill Require</th>
-				<th>Customer's name</th>
-				<th>Work's price</th>
-			</tr>
-		<% @join.each do |f|  %>
+    <aside class="col-md-4">
+        <section class="user_info">
+            <h1>
+                <%= gravatar_for @user %>
+                <%= @user.username %>
+            </h1>
+        </section>
+    </aside>
+  </div>
+  <% unless @join.empty? %>
+    <h2>List of works joined</h2>
+    <table class="table table-border table-hover">
+        <thead>
+            <tr>
+                <th>Work's name</th>
+                <th>Skill Require</th>
+                <th>Customer's name</th>
+                <th>Work's price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @join.each do |f|  %>
               <tr>
-                  <td><%= f.work.name %></td>
+                  <td><%=  link_to f.work.name, work_path(f.work) %></td>
                   <td>
-                  	 <% f.categories.each do |category| %>
+                      <% f.categories.each do |category| %>
                         <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
                         <%  end %>
-                  </td>
-                  <td><%= f.work.user.fullname %></td>
-                  <td><%= f.work.price %></td>
-              </tr>
-        <% end %>
-	</table>
-<% end %>
+                    </td>
+                    <td><%= link_to f.work.user.fullname, user_path(f.work.user)   %></td>
+                    <td><%= f.work.price %></td>
+                </tr>
+              <% end %>
+          </tbody>
+      </table>
+    <% end %>
