@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
 
   def show
-    @user = User.find(params[:id])
-    @join = Joiner.joins(:work).where(user_id: @user.id)
+    if logged_in?
+      @user = User.left_outer_joins(:joiners, :categories, :freelancer_categories).where(id: params[:id]).first
+    else
+      redirect_to login_path
+    end
   end
 
   def new
@@ -25,7 +28,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.joins(:role).where('id' =>params[:id]).first
+    if logged_in?
+      @user = User.joins(:role).where('id' =>params[:id]).first
+    else
+      redirect_to login_path
+    end
   end
 
   def update

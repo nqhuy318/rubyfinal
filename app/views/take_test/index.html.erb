@@ -1,12 +1,12 @@
+<div id="clock" class="row"></div>
 <div class="row">
     <center>
         <h3>Skill test</h3>
     </center>
-    <div class="col-md-2"></div>
-    <div class="col-md-4">
-        <%= form_tag('', :method => 'POST', remote: true) do %>
+    <div class="col-md-4 col-md-offset-2">
+        <%= form_tag('#', :method => 'POST', :id=>'test') do %>
           <% @tests.each_with_index do |q, q_index| %>
-        <h4>Question<%= q_index+1%>: <%= q.question %></h4>
+            <h4>Question<%= q_index+1%>: <%= q.question %></h4>
             <% q.answers.each_with_index do |a, a_index| %>
               <%if a_index == 0%><%= radio_button_tag q_index, a.id %>A.
               <%elsif a_index == 1%><%= radio_button_tag q_index, a.id %>B.
@@ -32,4 +32,29 @@
           margin-top: 0px;
           margin-bottom: 5px
       }
+      <%#*#clock span span span{%>
+          <%#*padding: 0;%>
+          <%#*margin: 0;%>
+      <%#*}%>
+      <%#*.countdown-amount{%>
+          <%#*padding: 0;%>
+          <%#*margin: 0;%>
+      <%#*}%>
+      <%#*.countdown-period{%>
+          <%#*padding: 0;%>
+          <%#*margin: 0;%>
+      <%#*}%>
   </style>
+  <script>
+    var countdown = function () {
+        $('#clock').countdown({
+            until: <%= @count_down%>, 
+            format: 'mm:ss', 
+            onExpiry: function () {
+                $('#test').submit();
+            }
+        });
+    }
+    document.addEventListener('turbolinks:load', countdown);
+    $(document).on('page:update', countdown);
+  </script>

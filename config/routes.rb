@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   get 'category/index'
 
-  get 'take_test/index/:id', to:'take_test#index'
-  post 'take_test/index/:id', to:'take_test#create'
+  get 'take-test/:id', to:'take_test#index'
+  post 'take-test/:id', to:'take_test#create'
   
   get 'joiners/new'
 
@@ -36,4 +36,5 @@ Rails.application.routes.draw do
   resources :works
   resources :joiners
   resources :categories
+#  resources :take
 end

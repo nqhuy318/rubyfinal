@@ -56,7 +56,7 @@ class WorksController < ApplicationController
       @work.user = @user
     end
     if @work.save
-      flash[:success] = "Project created"
+      flash[:success] = "Work created"
       redirect_to @work
     else
       flash[:danger] = "Cannot create"
@@ -82,7 +82,7 @@ class WorksController < ApplicationController
     @work = Work.find(params[:id])
     #    @work.status+=1
     if @work.update_attributes(work_params)
-      flash[:success] = "Project updated!"
+      flash[:success] = "Work updated!"
       redirect_to @work
     else
       render 'edit'
@@ -91,7 +91,7 @@ class WorksController < ApplicationController
 
   def destroy
     Work.find(params[:id]).destroy
-    redirect_to '/works'
+    redirect_to works_path
   end
   
   private

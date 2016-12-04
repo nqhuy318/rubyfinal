@@ -4,6 +4,7 @@ class User < ApplicationRecord
   belongs_to :role
   has_many :freelancer_categories
   has_many :categories, through: :freelancer_categories
+  has_many :joiners
 
 #  accepts_nested_attributes_for  :freelancer_categories
   before_save { email.downcase! }

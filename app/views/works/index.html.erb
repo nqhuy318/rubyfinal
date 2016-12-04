@@ -5,28 +5,26 @@
     <table class="table table-border table-hover">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>#</th>
                 <th>Project's name</th> 
                 <th>Skill Require</th>
-                <th>Customer</th>
                 <th>Price</th>
                 <th>Status</th>
                 <th>Options</th>
             </tr>
         </thead>
         <tbody>
-            <% @works.each do |work|  %>
+            <% @works.each_with_index do |work, index|  %>
               <tr>
-                  <td><%= work.id %></td>
+                  <td><%= index + 1 %></td>
                   <td><%= work.name %></td>
                   <td><% work.categories.each do |category| %>
                         <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
                         <%  end %>
                     </td>
-                    <td><%= work.user.fullname %></td>
                     <td><%= work.price %></td>
                     <td><% if work.status == 1 %>
-                          <%= "Stated" %>
+                          <%= "Started" %>
                         <% elsif work.status == 0 %>
                           <%= "Waiting" %>
                         <% elsif work.status == 2 %>

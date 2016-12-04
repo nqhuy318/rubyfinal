@@ -6,6 +6,7 @@ class TakeTestController < ApplicationController
         if !@check.empty? 
           @tests = Question.where(category_id: params[:id]).joins(:answers).order("RANDOM()").limit(3).distinct
           load_test @tests
+          @count_down = 900
           #          @fc = FreelancerCategory.where(category_id: params[:id], user_id:current_user)
         else 
           flash[:warning] = "You don't have permission"
@@ -37,6 +38,7 @@ class TakeTestController < ApplicationController
       end
       @fc.skill_point = count*5.0
       @fc.save
+      redirect_to @fc.user
     else
       redirect_to current_user
     end

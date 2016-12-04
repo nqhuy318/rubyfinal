@@ -1,25 +1,26 @@
 <% provide(:title, 'Post project') %>
-<h1>Post new Project</h1>
+<h3>Post a new work</h3>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <%= form_tag(works_path, :method => 'POST') do %>
 
           <%= label_tag 'name' %>
-          <%= text_field_tag 'name' %>
+          <%= text_field_tag 'name', '', class: 'form-control' %>
 
-          <%= label_tag 'category_ids',"Skill Require" %>
-          <br>
-          <% Category.all.each do |category| %>
-            <%= category.name %>
-            <%= check_box_tag 'category_ids[]', category.id, false, class: 'form-control' %>
-            <% end %>
+            <%= label_tag 'category_ids',"Skill Require" %>
+            <br>
+            <% Category.all.each do |category| %> 
+              <div class="col-md-6">
+                  <%= label_tag '', category.name, class: 'check_box_label' %>
+                    <%= check_box_tag 'category_ids[]', category.id, false %>
+                </div>
+              <% end %>
+              <%= label_tag 'description' %>
+              <%= text_area_tag 'description', '', class: 'form-control' %>
 
-            <%= label_tag 'description' %>
-            <%= text_area_tag 'description' %>
-
-            <%= label_tag 'price' %>
-            <%= number_field_tag 'price' %>
-            <%= submit_tag "Submit work", class: "btn btn-primary" %>
-            <% end %>
-        </div>
-    </div>
+                <%= label_tag 'price' %>
+                <%= number_field_tag 'price','', class: 'form-control' %>
+                  <%= submit_tag "Submit work", class: "btn btn-primary" %>
+                  <% end %>
+              </div>
+          </div>
