@@ -1,12 +1,17 @@
 
 <%= form_tag(search_works_path, :method => "post") do %>
-  <% @categories.each do |category| %>
-    <%= category.name %>
-    <%= check_box_tag 'category_ids[]', category.id, class: 'form-control' %>
-    <% end %>
-    <%= submit_tag "Search" %>
-  <% end %>
   <center>
+<table>
+  <tr>
+  <% @categories.each do |category| %>
+    <th><%= category.name %></th>
+    <td><%= check_box_tag 'category_ids[]', category.id, class: 'form-control' %></td>
+    <% end %>
+    </tr>
+    </table>
+    <%= button_tag "Search", :class => "btn btn-primary btn-md center" %>
+  <% end %>
+
       <h2>List works</h2>
   </center>
   <hr/>
