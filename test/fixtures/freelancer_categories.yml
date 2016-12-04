@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  skill_point: 1.5
+  experience_point: 1.5
+  category: one
+  user: one
+
+two:
+  skill_point: 1.5
+  experience_point: 1.5
+  category: two
+  user: two

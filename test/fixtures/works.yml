@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  name: MyString
+  description: MyString
+  price: MyString
+  created_date: 2016-11-19
+  deadline: 2016-11-19
+
+two:
+  user: two
+  name: MyString
+  description: MyString
+  price: MyString
+  created_date: 2016-11-19
+  deadline: 2016-11-19
