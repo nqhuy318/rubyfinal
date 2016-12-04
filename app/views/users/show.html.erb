@@ -6,6 +6,10 @@
         <%= gravatar_for @user %>
         <%= @user.username %>
       </h1>
+
+      <%= "Fullname:" %> <%= current_user.fullname %><br>
+      <%= "Gender:" %> <%= current_user.gender %><br>
+      <%= "Contact:" %> <%= current_user.contact %>
     </section>
   </aside>
   <% if (current_user.role_id == 2) %>
