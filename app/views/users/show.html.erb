@@ -25,9 +25,11 @@
               <tr>
                   <td><%= f.work.name %></td>
                   <td>
-                  	 
+                  	 <% f.categories.each do |category| %>
+                        <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
+                        <%  end %>
                   </td>
-                  <td><%= f.work.user_id %></td>
+                  <td><%= f.work.user.fullname %></td>
                   <td><%= f.work.price %></td>
               </tr>
         <% end %>
