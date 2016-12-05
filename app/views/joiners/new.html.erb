@@ -1,33 +1,41 @@
 <% provide(:title, @work.name) %>
 <div class="row">
-    <aside class="col-md-4">
-        <section class="work_info">
-            <h1>
-                Name:
-            </h1>
-            <%= @work.name %>
-            <h1>
-                Skill Require:
-            </h1>
-            <% @work.categories.each do |category| %>
-              <%= category.name %>
-            <%  end %>
-            <h1>
-                Description:
-            </h1>
-            <%= @work.description %>
-            <h1>
-                Price:
-            </h1>
-            <%= @work.price %>
-            <%= form_for(@joiner, url: joiners_path) do |f|  %>
-              <%= f.hidden_field :work_id, :value =>@work.id %>
-              <%= f.hidden_field :user_id, :value =>current_user[:id] %>
-              <%= f.submit "Join work", class: "btn btn-primary col-md-3" %>
-              <% end %>
-          </section>
+    <h3>Work 's detail</h3>
+    <table class="table table-hover">
+        <tr>
+            <td class="active col-md-4">Name</td>
+            <td> <%= @work.name %></td>
+        </tr>
+        <tr>
+            <td class="active col-md-4">Customer's name</td>
+            <td> <%= link_to @work.user.fullname, user_path(@work.user) %></td>
+        </tr>
+        <tr>
+            <td class="active">Skill Require</td>
+            <td> 
+                <% @work.categories.each do |category| %>
+                  <%= label_tag '',  category.name , class: 'btn btn-default'%>
+                  <%  end %>
+              </td>
+          </tr>
+          <tr>
+              <td class="active">Description</td>
+              <td> <%= @work.description %></td>
+          </tr>
+          <tr>
+              <td class="active">Price</td>
+              <td> <%= @work.price %></td>
+          </tr>
+          <tr>
+              <td colspan="2">
+                  <%= form_for(@joiner, url: joiners_path) do |f|  %>
+                    <%= f.hidden_field :work_id, :value =>@work.id %>
+                    <%= f.hidden_field :user_id, :value =>current_user[:id] %>
+                    <%= f.submit "Join work", class: "btn btn-primary col-md-3" %>
+                    <% end %>
+                </td>
+            </tr>
+        </table>
 
-      </aside>
-
-  </div>
+    </div>
 

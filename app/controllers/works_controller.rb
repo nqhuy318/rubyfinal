@@ -5,11 +5,11 @@ class WorksController < ApplicationController
     unless @user.nil?
       if(@user[:role_id] == 2)
         #        @joiner = Joiner.new;
-        @work = Work.joins(:categories, :user).left_outer_joins(:joiners).distinct.where(id: params[:id]).first
+        @work = Work.joins(:user).left_outer_joins(:categories, :joiners).distinct.where(id: params[:id]).first
 #        @work.status+=1
       elsif(@user[:role_id] == 1)
         @joiner = Joiner.new;
-        @work = Work.joins(:categories, :user).left_outer_joins(:joiners).distinct.where(id: params[:id]).first
+        @work = Work.joins(:user).left_outer_joins(:joiners, :categories,).distinct.where(id: params[:id]).first
         render 'joiners/new'
       end
     else
@@ -39,7 +39,7 @@ class WorksController < ApplicationController
       redirect_to login_path
     else
       if @user[:role_id] == 2
-        @works = Work.where(user_id: @user.id).joins(:categories).distinct.order("status")
+        @works = Work.where(user_id: @user.id).left_outer_joins(:categories).distinct.order("status")
       else
         flash[:warning] = "You don't have permission"
       end
