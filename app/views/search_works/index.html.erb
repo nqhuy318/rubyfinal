@@ -44,9 +44,7 @@
                               <%= link_to 'View detail', work_path(work), class: "btn btn-default"  %>
                             </td>
                         </tr>
-                      <% end
-                      else
-                    %>
+                      <% end %>
                     <%  end%>
                 </tbody>
             </table>
@@ -57,17 +55,15 @@
                       var arr = new Array();
                       $('input:checkbox[name="category_ids[]"]').each(function () {
                           if ($(this).is(':checked')) {
-                              alert($(this).val());
                               arr.push($(this).val());
                           }
                       });
-                      <%#*alert(category_ids);%>
                       $.ajax({
                           url: '/search_works',
                           type: 'POST',
-                          data: {category_ids: arr},
-                          success: function () {
-                              $("#results").html("<%= j render 'search_works/list_works'  %> ")
+                          data: {category_ids: arr, commit: 'Search'},
+                          success: function (work) {
+                              $("#results").html(work)
                           },
                           error: function () {
                               alert("error");
