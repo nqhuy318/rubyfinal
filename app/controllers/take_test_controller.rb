@@ -2,11 +2,24 @@ class TakeTestController < ApplicationController
   def index
     if logged_in?
       if current_user[:role_id] == 1
-        @check = User.joins(:categories).where(id: current_user, categories:{id: params[:id] })
+        @check = User.joins(:categories).where(id: current_user, categories:{id: params[:id]})
         if !@check.empty? 
-          @tests = Question.where(category_id: params[:id]).joins(:answers).order("RANDOM()").limit(3).distinct
-          load_test @tests
-          @count_down = 15
+          unless is_loaded?
+            @tests = Question.where(category_id: params[:id]).joins(:answers).order("RANDOM()").limit(3).distinct
+            load_test @tests
+            set_count_down_time(15)
+          else
+            #            arr = []
+            #            print current_test.to_yaml
+            #            current_test.each{|q|
+            #              arr.push(q['id'])
+            #            }
+            #            @tests = Question.where(id: arr).joins(:answers).distinct
+            #            @count_down = get_time
+            destroy_test
+            flash[:danger] = "Cancel test!"
+            redirect_to current_user
+          end
         else 
           flash[:warning] = "You don't have permission"
           redirect_to current_user
@@ -39,5 +52,6 @@ class TakeTestController < ApplicationController
     else
       redirect_to current_user
     end
+    destroy_test
   end
 end
