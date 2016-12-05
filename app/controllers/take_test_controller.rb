@@ -7,7 +7,6 @@ class TakeTestController < ApplicationController
           @tests = Question.where(category_id: params[:id]).joins(:answers).order("RANDOM()").limit(3).distinct
           load_test @tests
           @count_down = 15
-          #          @fc = FreelancerCategory.where(category_id: params[:id], user_id:current_user)
         else 
           flash[:warning] = "You don't have permission"
           redirect_to current_user
@@ -29,8 +28,6 @@ class TakeTestController < ApplicationController
       count = 0.0
       test.each_with_index do |test, index|
         if !params[index.to_s].nil?
-          #          logger.debug test['id']
-          #          count = test[:id]
           if check_answer(params[index.to_s])
             count = count + 1.0
           end
