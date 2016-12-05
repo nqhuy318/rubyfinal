@@ -22,7 +22,7 @@ class JoinersController < ApplicationController
     @joiner.status = 1
     if @joiner.update_attributes(joiner_params)
       flash[:success] = "Success!"
-      redirect_to @joiner
+      redirect_to @joiner.work
     else
       render 'edit'
     end

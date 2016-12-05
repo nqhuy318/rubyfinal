@@ -4,12 +4,12 @@ class WorksController < ApplicationController
     @user = current_user
     unless @user.nil?
       if(@user[:role_id] == 2)
-        @joiner = Joiner.new;
-        @work = Work.joins(:categories).distinct.where(id: params[:id]).first
-        #        @work.status+=1
+        #        @joiner = Joiner.new;
+        @work = Work.joins(:categories, :user).left_outer_joins(:joiners).distinct.where(id: params[:id]).first
+#        @work.status+=1
       elsif(@user[:role_id] == 1)
         @joiner = Joiner.new;
-        @work = Work.joins(:categories).left_outer_joins(:joiners).distinct.where(id: params[:id]).first
+        @work = Work.joins(:categories, :user).left_outer_joins(:joiners).distinct.where(id: params[:id]).first
         render 'joiners/new'
       end
     else
@@ -21,6 +21,7 @@ class WorksController < ApplicationController
     unless current_user.nil?
       if current_user[:role_id] == 2
         @work = Work.new
+        @work.categories.build
       else
         flash[:danger] = "You don't have permission"
         redirect_to current_user
@@ -80,7 +81,11 @@ class WorksController < ApplicationController
 
   def update
     @work = Work.find(params[:id])
-    #    @work.status+=1
+    #    unless params[:status].nil?
+    #      @work.status = work_params[:status]
+    #    end
+    #    @test = Work.new(work_params)
+    #    @work.status = @test.status
     if @work.update_attributes(work_params)
       flash[:success] = "Work updated!"
       redirect_to @work
@@ -97,6 +102,6 @@ class WorksController < ApplicationController
   private
 
   def work_params
-    params.permit(:name, :description, :price)
+    params.permit(:name, :description, :price, :status)
   end
 end
