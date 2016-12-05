@@ -23,9 +23,9 @@
                     </div>
                 </div>
                 <%= label_tag :contact %>
-                <%= text_field_tag :contact, '', class: 'form-control' %>
+                <%= text_field_tag :contact, @user.contact, class: 'form-control' %>
                   <%= label_tag :info %>
-                  <%= text_area_tag :info, '', class: 'form-control' %>
+                  <%= text_area_tag :info, @user.info, class: 'form-control' %>
 
                     <%= label_tag :role_id, 'Your are a '+@user.role.name%>
                     <div id="list"></div>
