@@ -1,0 +1,28 @@
+footer{
+	border-top: solid 1px #d6d6d6;
+	padding: 20px 0 20px 35px;
+	background-color: white;
+	height: 60px;
+	text-align: center;
+	position: fixed-bottom;
+}
+
+footer .copyright{
+	display: inline-block;
+	float: left;
+}
+
+footer .contact-information{
+	display: inline-block;
+	float: right;
+	font-size: 1.1em;
+}
+
+.contact-information .glyphicon{
+	margin-right: 10px;
+}
+
+.contact-information .infor-detail{
+	display: inline-block;
+	margin-right: 70px;
+}

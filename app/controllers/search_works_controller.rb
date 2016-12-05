@@ -39,6 +39,7 @@ class SearchWorksController < ApplicationController
       redirect_to login_path
     else
       if @user[:role_id] == 1
+#        print params[:category_ids].to_yml
         #        @categories = Category.joins(:freelancer_categories).where(freelancer_categories:{user_id: @user[:id]})
         if !params[:category_ids].nil?
           @categories = Category.joins(:freelancer_categories).where(freelancer_categories:{user_id: @user[:id]})
@@ -120,5 +121,4 @@ class SearchWorksController < ApplicationController
     }
     return check
   end
-  
 end
