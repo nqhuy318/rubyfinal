@@ -98,7 +98,15 @@ class SearchWorksController < ApplicationController
       return count
     }
   end
-  
+
+  def search_category
+    @id = params[:id_aj]
+    @category = Category.find(@id);
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def check_not_match(user_categories, *work_categories)
     count = 0
     work_categories.each {

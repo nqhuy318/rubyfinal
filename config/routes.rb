@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   get 'search_works/index'
   get 'search_works', to: 'search_works#index'
   post 'search_works', to: 'search_works#advance'
-  
+
+  resources :search_works do
+    get :search_category, on: :collection
+  end
+
   get 'sessions/new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'

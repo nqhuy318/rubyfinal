@@ -1,11 +1,9 @@
 
-<%= form_tag(search_works_path, :method => "post") do %>
   <% @categories.each do |category| %>
     <%= category.name %>
     <%= check_box_tag 'category_ids[]', category.id, class: 'form-control' %>
+    <div id="result"></div>
     <% end %>
-    <%= submit_tag "Search" %>
-  <% end %>
   <center>
       <h2>List works</h2>
   </center>
@@ -49,3 +47,39 @@
             </tbody>
         </table>
 
+
+<script>
+/*$('#category_ids_').click(function() {
+  var url = "/search_works/search_category";
+  var data = $('#category_ids_').val();
+  $.get(url, {'id': data}, function(response){
+
+  });
+});*/
+/*$( "#category_ids_" ).click(function() {
+  alert( "Handler for .click() called." );
+});*/
+ /* var $checkboxes = $("input[type=checkbox][name=category_ids_]");
+  $checkboxes.on("click",
+    function () {
+      alert( "Handler for .click() called." );
+    }
+  });*/
+
+  $('input:checkbox[name="category_ids[]"]').change(
+    function () {
+      var check = [];
+      var url = "/search_works/search_category";
+      $('input:checkbox[name="category_ids[]"]').each(function () {
+        if ($(this).is(':checked')) {
+            check.push(parseInt($(this).val()));
+        }
+        else {
+        }
+      });
+      $.get(url, {'id_aj[]': check}, function(response) {
+
+      });
+    });
+    
+</script>
