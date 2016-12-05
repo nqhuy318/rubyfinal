@@ -17,11 +17,11 @@ class SearchWorksController < ApplicationController
           else
             case
             when check_match(@categories, a.categories) < check_match(@categories, b.categories) 
-              -1
-            when check_match(@categories, a.categories) > check_match(@categories, b.categories)
               1
+            when check_match(@categories, a.categories) > check_match(@categories, b.categories)
+              -1
             else
-              a.categories.length <=> b.categories.length
+              b.price <=> a.price
             end
           end
         end
@@ -40,7 +40,7 @@ class SearchWorksController < ApplicationController
     else
       if @user[:role_id] == 1
         #        @categories = Category.joins(:freelancer_categories).where(freelancer_categories:{user_id: @user[:id]})
-        if(!params[:category_ids].nil?)
+        if !params[:category_ids].nil?
           @categories = Category.joins(:freelancer_categories).where(freelancer_categories:{user_id: @user[:id]})
           @works = Work.joins(:categories).joins(:user).where(status:0, categories:{id: params[:category_ids]}).distinct
           @works = @works.sort do |a, b|
@@ -52,9 +52,9 @@ class SearchWorksController < ApplicationController
             else
               case
               when check_match(@categories, a.categories) < check_match(@categories, b.categories) 
-                -1
-              when check_match(@categories, a.categories) > check_match(@categories, b.categories)
                 1
+              when check_match(@categories, a.categories) > check_match(@categories, b.categories)
+                -1
               else
                 a.categories.length <=> b.categories.length
               end
@@ -72,9 +72,9 @@ class SearchWorksController < ApplicationController
             else
               case
               when check_match(@categories, a.categories) < check_match(@categories, b.categories) 
-                -1
-              when check_match(@categories, a.categories) > check_match(@categories, b.categories)
                 1
+              when check_match(@categories, a.categories) > check_match(@categories, b.categories)
+                -1
               else
                 a.categories.length <=> b.categories.length
               end
@@ -89,33 +89,36 @@ class SearchWorksController < ApplicationController
     end
     render 'index'
   end
-  def check_match(user_categories, *work_categories)
+  
+  def check_match(user_categories, work_categories)
     count = 0
     work_categories.each {
       |category| if check_exist(category, user_categories)
         count = count +1
       end
-      return count
     }
+    return count
   end
   
-  def check_not_match(user_categories, *work_categories)
+  def check_not_match(user_categories, work_categories)
     count = 0
-    work_categories.each {
-      |category| if !check_exist(category, user_categories)
+    work_categories.each {|category|
+      if !check_exist(category, user_categories)
         count = count +1
       end
-      return count
     }
+    return count
   end
   
-  def check_exist(category, *user_categories)
+  def check_exist(category, user_categories)
     check =  false
-    user_categories.each {
-      |user_category| if user_category == category
+    user_categories.each { |user_category| 
+      if user_category["id"] == category["id"]
         check = true
+        break
       end
     }
     return check
   end
+  
 end
