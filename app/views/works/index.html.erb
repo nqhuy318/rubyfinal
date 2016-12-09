@@ -1,0 +1,48 @@
+<br>
+<br>
+<% provide(:title, 'List of projects') %>
+<% unless @works.nil? %>
+  <h1>List of projects</h1>
+  <%=  link_to 'New', new_work_path, class: 'btn btn-primary' %>
+    <table class="table table-border table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Project's name</th> 
+                <th>Skill Require</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @works.each_with_index do |work, index|  %>
+              <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= work.name %></td>
+                  <td><% work.categories.each do |category| %>
+                        <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
+                        <%  end %>
+                    </td>
+                    <td><%= work.price %></td>
+                    <td><% if work.status == 1 %>
+                          <%= "Started" %>
+                        <% elsif work.status == 0 %>
+                          <%= "Waiting" %>
+                        <% elsif work.status == 2 %>
+                          <%= "Done" %>
+                        <% end %>
+                    </td>
+                    <td>
+                        <%=  link_to 'Show', work_path(work), class: 'btn btn-primary' %>
+                          <% if work.status <2 %>
+                            <%=  link_to 'Edit', edit_work_path(work), class: 'btn btn-warning' %>
+                            <% end %>
+                            <% if work.status <1 %>
+                              <%=  link_to 'Delete',  work, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+                              <% end %>
+                          </td>
+                        <% end %>
+                </tbody>
+            </table>
+          <% end %>

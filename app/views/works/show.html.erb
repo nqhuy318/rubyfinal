@@ -1,0 +1,87 @@
+<br>
+<br>
+<% provide(:title, @work.name) %>
+<div class="row">
+    <h3>Work 's detail</h3>
+    <table class="table table-hover">
+        <tr>
+            <td class="active col-md-4">Name</td>
+            <td> <%= @work.name %></td>
+        </tr>
+        <tr>
+            <td class="active">Skill Require</td>
+            <td> 
+                <% @work.categories.each do |category| %>
+                  <%= label_tag '',  category.name , class: 'btn btn-default'%>
+                  <%  end %>
+              </td>
+          </tr>
+          <tr>
+              <td class="active">Description</td>
+              <td> <%= @work.description %></td>
+          </tr>
+          <tr>
+              <td class="active">Price</td>
+              <td> <%= @work.price %></td>
+          </tr>
+          <tr>
+              <td colspan="2">
+                  <%if current_user[:id] == @work.user.id%>
+                    <%= form_tag(work_path(@work), :method => 'PUT') do  %>
+                      <%#= f.hidden_field :id, :value =>@work.id %>
+                      <%= hidden_field_tag :status, @work.status+1 %>
+                      <% if @work.status == 0 %>
+                        <%= submit_tag "Start", class: "btn-primary" %>
+                        <%elsif @work.status == 1 %>
+                          <%= submit_tag "Finish", class: "btn-primary" %>
+                          <%elsif @work.status == 2 %>
+                            <%= label_tag '',  "Finished", class: "btn-primary, disabled" %>
+                            <%end%>
+                          <% end %>
+                        <%end%>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <h1>List of joiners</h1>
+        <table class="table table-border table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Joiner 's name</th> 
+                    <th>Joiner 's skill</th>
+                    <th>Review</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% unless @work.joiners.empty? %>
+                  <% @work.joiners.each_with_index do |join, index|  %>
+                    <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%=  link_to join.user.fullname, user_path(join.user) %></td>
+                        <td><% join.categories.each do |category| %>
+                              <%=  category.name %>
+                            <%  end %>
+                        </td>
+                        <td>Nothing!</td>
+                        <td>
+            <%#=  link_to 'Show', user_path(join.id), class: 'btn btn-primary' %>
+                            <% if join.status == 0%>
+                              <%= form_for(join, url: joiner_path(join), html: {method: "Patch"}) do |f|  %>
+                                <%= f.hidden_field :joiner_id, :value =>join.id %>
+                                <%= f.submit "Accept", class: "btn btn-primary col-md-6" %>
+                                <% end %>
+                                <%= form_for(join, url: joiner_path(join), html: {method: "Delete"}) do |d|  %>
+                                  <%= d.hidden_field :joiner_id, :value =>join.id %>
+                                  <%= d.submit "Delete", class: "btn btn-danger col-md-6" %>
+                                  <% end %>
+                                <% else  %>
+                                  <%= label '', 'Joined', class: "btn btn-default, disable" %>
+                                  <% end %>
+                              </td>
+                          </tr>
+                        <% end %>
+                      <%end %>
+                  </tbody>
+              </table>
