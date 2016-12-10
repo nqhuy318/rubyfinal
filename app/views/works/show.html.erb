@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-<br>
-<br>
-=======
->>>>>>> master
 <% provide(:title, @work.name) %>
 <div class="row">
     <h3>Work 's detail</h3>
@@ -31,7 +26,7 @@
               <td colspan="2">
                   <%if current_user[:id] == @work.user.id%>
                     <%= form_tag(work_path(@work), :method => 'PUT') do  %>
-                      <%#= f.hidden_field :id, :value =>@work.id %>
+      <%#= f.hidden_field :id, :value =>@work.id %>
                       <%= hidden_field_tag :status, @work.status+1 %>
                       <% if @work.status == 0 %>
                         <%= submit_tag "Start", class: "btn-primary" %>
