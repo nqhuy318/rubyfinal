@@ -1,279 +1,160 @@
-<<<<<<< HEAD
-  <% provide(:title, @user.fullname) %>
-  <br>
-  <br>
-  <div class="row">
-      <aside class="col-md-5">
-        <section class="user-info">
-          <div class="user-img">
-              <%= gravatar_for @user %>
-          </div>
-  </div>
-  <div class="row">
-  <aside class="col-md-5">
-      <div class="user-info-detail">
-      <h3>Profile</h3>
-      <table class="table table-hover">
-          <tr>
-              <td class="active col-md-2">Full name</td>
-              <td><%= @user.fullname %></td>
-          </tr>
-          <tr>
-              <td class="active">Gender</td>
-              <td><%= @user.gender %></td>
-          </tr>
-          <tr>
-              <td class="active">Contact</td>
-              <td><%= @user.contact %></td>
-          </tr>
-          <tr>
-              <td class="active">Info</td>
-              <td><%= @user.info %></td>
-          </tr>
-          <tr>
-              <td class="active">Role</td>
-              <td><%= @user.role.name %> </td>
-          </tr>
-          <% if @user.role.id == 2 %>
-            <tr>
-                <td class="active">Number of created work</td>
-                <td><%= link_to @user.works.length, works_path    %> </td>   
-            </tr>
-          <%end%>
-      </table>
-  </div>
-  <% unless @user.categories.empty? %>
-    <hr/>
-    <h3>Skill</h3>
-    <table class="table table-hover table-strip">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Skill</th>
-                <th>Skill point</th>
-                <th>Experience point</th>
-                <% unless current_user.categories.empty? %>
-                  <th>Action</th>
-                <%end%>
-            </tr>
-        </thead>
-        <tbody>
-            <% @user.freelancer_categories.each_with_index do |c, index|  %>
-              <tr>
-                  <td><%= index +1 %> </td>
-                  <td><%= c.category.name  %> </td>
-                  <td><%= c.skill_point %> </td>
-                  <td><%= c.experience_point%> </td>
-                  <% unless current_user.categories.empty? %>
-                    <td>
-                        <%=  link_to 'Take skill test', '/take-test/'+c.category.id.to_s, data: { confirm: 'Do you want to take a test about '+c.category.name }, class: "btn btn-success" %>
-                      </td>               
-                    <%end%>
-                </tr>
-              <%end%>
-          </tbody>
-      </table>
-    <% end %>
-    <% unless @user.works.empty? %>
-      <hr/>
-      <h1>List of works</h1>
-      <table class="table table-border table-hover">
-          <thead>
-              <tr>
-                  <th>#</th>
-                  <th>Work's name</th> 
-                  <th>Skill Require</th>
-                  <th>Price</th>
-              </tr>
-          </thead>
-          <tbody>
-              <% @user.works.each_with_index do |work, index|  %>
-                <tr>
-                    <td><%= index + 1 %></td>
-                    <td><%= work.name %></td>
-                    <td><% work.categories.each do |category| %>
-                          <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
-                          <%  end %>
-                    </td>
-                    <td><%= work.price %></td>
-                    <% end %>
-            </tbody>
-        </table>
-      <% end %>
-      <% unless @user.joiners.empty? %>
-        <hr/>
-        <h3>List of joined works </h3>
-        <table class="table table-border table-hover">
-            <tr>
-                <th>#</th>
-                <th>Work's name</th>
-                <th>Customer's name</th>
-                <th>Review</th>
-                <th>Quit</th>
-            </tr>
-            <% @user.joiners.each_with_index do |f, index|  %>
-              <% if f.status == 1 %>
-                <tr>
-                    <td><%= index + 1%></td>
-                    <td><%=  link_to f.work.name, work_path(f.work) %></td>
-                    <td><%= link_to f.work.user.fullname, user_path(f.work.user)   %></td>
-                    <td>Nothing</td>
-                    <td><%= link_to f.destroy,"Quit", class: "btn btn-primary"%>
-                </tr>
-              <% end %>
-            <% end %>
-        </tbody>
-        </table>
-      <% end %>
-
-<br>
-<br>
-</tr>
-</tbody>
-</table>
-</aside>
-</div>
-
-<section id="one" class="wrapper style1">
-        <div class="inner">
-          <article class="feature left">
-            <span class="image">
-              <%= image_tag("pic01.jpg", alt: "", title: "") %>
-            </span>
-            <div class="content">
-              <h2>Need work done?</h2>
-              <p>Post your project and receive requests from freelancers within minutes. Our reputation system will make it easy to find the perfect freelancer for your job. It's the simplest and safest way to get work done online!</p>
-            </div>
-          </article>
-          <article class="feature right">
-            <span class="image">
-            <%= image_tag("pic02.jpg", alt: "", title: "") %>
-            </span>
-            <div class="content">
-              <h2>How do you benefit?</h2>
-              <p>You'll receive requests from our talented freelancers within minutes</p>
-              <p>Keeping up-to-date is easy with our realtime chat, 24/7 support, time tracker, and mobile apps</p>
-              <p>Pay for work safely and securely. Only release payment when you are 100% satisfied with the work provided!</p>
-              
-            </div>
-          </article>
-        </div>
-      </section>
-=======
 <% provide(:title, @user.fullname) %>
 <div class="row">
-    <%= gravatar_for @user %>
+    <aside class="col-md-5">
+        <section class="user-info">
+            <div class="user-img">
+                <%= gravatar_for @user %>
+            </div>
+        </section>
+    </aside>
 </div>
 <div class="row">
-    <h3>Profile</h3>
-    <table class="table table-hover">
-        <tr>
-            <td class="active col-md-2">Full name</td>
-            <td><%= @user.fullname %></td>
-        </tr>
-        <tr>
-            <td class="active">Gender</td>
-            <td><%= @user.gender %></td>
-        </tr>
-        <tr>
-            <td class="active">Contact</td>
-            <td><%= @user.contact %></td>
-        </tr>
-        <tr>
-            <td class="active">Info</td>
-            <td><%= @user.info %></td>
-        </tr>
-        <tr>
-            <td class="active">Role</td>
-            <td><%= @user.role.name %> </td>
-        </tr>
-        <% if @user.role.id == 2 %>
-          <tr>
-              <td class="active">Number of created work</td>
-              <td><%= link_to @user.works.length, works_path    %> </td>   
-          </tr>
-        <%end%>
-    </table>
-</div>
-<% unless @user.categories.empty? %>
-  <hr/>
-  <h3>Skill</h3>
-  <table class="table table-hover table-strip">
-      <thead>
-          <tr>
-              <th>#</th>
-              <th>Skill</th>
-              <th>Skill point</th>
-              <th>Experience point</th>
-              <% unless current_user.categories.empty? %>
-                <th>Action</th>
-              <%end%>
-          </tr>
-      </thead>
-      <tbody>
-          <% @user.freelancer_categories.each_with_index do |c, index|  %>
-            <tr>
-                <td><%= index +1 %> </td>
-                <td><%= c.category.name  %> </td>
-                <td><%= c.skill_point %> </td>
-                <td><%= c.experience_point%> </td>
-                <% unless current_user.categories.empty? %>
-                  <td>
-                      <%=  link_to 'Take skill test', '/take-test/'+c.category.id.to_s, data: { confirm: 'Do you want to take a test about '+c.category.name }, class: "btn btn-success" %>
-                    </td>               
-                  <%end%>
-              </tr>
-            <%end%>
-        </tbody>
-    </table>
-  <% end %>
-  <% unless @user.works.empty? %>
-    <hr/>
-    <h1>List of works</h1>
-    <table class="table table-border table-hover">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Work's name</th> 
-                <th>Skill Require</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @user.works.each_with_index do |work, index|  %>
-              <tr>
-                  <td><%= index + 1 %></td>
-                  <td><%= work.name %></td>
-                  <td><% work.categories.each do |category| %>
-                        <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
-                        <%  end %>
-                    </td>
-                    <td><%= work.price %></td>
-                  <% end %>
-          </tbody>
-      </table>
-    <% end %>
-    <% unless @user.joiners.empty? %>
-      <hr/>
-      <h3>List of joined works </h3>
-      <table class="table table-border table-hover">
-          <tr>
-              <th>#</th>
-              <th>Work's name</th>
-              <th>Customer's name</th>
-              <th>Review</th>
-          </tr>
-          <% @user.joiners.each_with_index do |f, index|  %>
-            <% if f.status == 1 %>
-              <tr>
-                  <td><%= index + 1%></td>
-                  <td><%=  link_to f.work.name, work_path(f.work) %></td>
-                  <td><%= link_to f.work.user.fullname, user_path(f.work.user)   %></td>
-                  <td>Nothing</td>
-              </tr>
-            <% end %>
+    <aside class="col-md-5">
+        <div class="user-info-detail">
+            <h3>Profile</h3>
+            <table class="table table-hover">
+                <tr>
+                    <td class="active col-md-2">Full name</td>
+                    <td><%= @user.fullname %></td>
+                </tr>
+                <tr>
+                    <td class="active">Gender</td>
+                    <td><%= @user.gender %></td>
+                </tr>
+                <tr>
+                    <td class="active">Contact</td>
+                    <td><%= @user.contact %></td>
+                </tr>
+                <tr>
+                    <td class="active">Info</td>
+                    <td><%= @user.info %></td>
+                </tr>
+                <tr>
+                    <td class="active">Role</td>
+                    <td><%= @user.role.name %> </td>
+                </tr>
+                <% if @user.role.id == 2 %>
+                  <tr>
+                      <td class="active">Number of created work</td>
+                      <td><%= link_to @user.works.length, works_path    %> </td>   
+                  </tr>
+                <%end%>
+            </table>
+        </div>
+        <% unless @user.categories.empty? %>
+          <hr/>
+          <h3>Skill</h3>
+          <table class="table table-hover table-strip">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Skill</th>
+                      <th>Skill point</th>
+                      <th>Experience point</th>
+                      <% unless current_user.categories.empty? %>
+                        <th>Action</th>
+                      <%end%>
+                  </tr>
+              </thead>
+              <tbody>
+                  <% @user.freelancer_categories.each_with_index do |c, index|  %>
+                    <tr>
+                        <td><%= index +1 %> </td>
+                        <td><%= c.category.name  %> </td>
+                        <td><%= c.skill_point %> </td>
+                        <td><%= c.experience_point%> </td>
+                        <% unless current_user.categories.empty? %>
+                          <td>
+                              <%=  link_to 'Take skill test', '/take-test/'+c.category.id.to_s, data: { confirm: 'Do you want to take a test about '+c.category.name }, class: "btn btn-success" %>
+                            </td>               
+                          <%end%>
+                      </tr>
+                    <%end%>
+                </tbody>
+            </table>
           <% end %>
-      </tbody>
-      </table>
-    <% end %>
->>>>>>> master
+          <% unless @user.works.empty? %>
+            <hr/>
+            <h1>List of works</h1>
+            <table class="table table-border table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Work's name</th> 
+                        <th>Skill Require</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @user.works.each_with_index do |work, index|  %>
+                      <tr>
+                          <td><%= index + 1 %></td>
+                          <td><%= work.name %></td>
+                          <td><% work.categories.each do |category| %>
+                                <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
+                                <%  end %>
+                            </td>
+                            <td><%= work.price %></td>
+                          <% end %>
+                  </tbody>
+              </table>
+            <% end %>
+            <% unless @user.joiners.empty? %>
+              <hr/>
+              <h3>List of joined works </h3>
+              <table class="table table-border table-hover">
+                  <tr>
+                      <th>#</th>
+                      <th>Work's name</th>
+                      <th>Customer's name</th>
+                      <th>Review</th>
+                      <th>Quit</th>
+                  </tr>
+                  <% @user.joiners.each_with_index do |f, index|  %>
+                    <% if f.status == 1 %>
+                      <tr>
+                          <td><%= index + 1%></td>
+                          <td><%=  link_to f.work.name, work_path(f.work) %></td>
+                          <td><%= link_to f.work.user.fullname, user_path(f.work.user)   %></td>
+                          <td>Nothing</td>
+                          <td><%= link_to f.destroy,"Quit", class: "btn btn-primary"%>
+                        </tr>
+                      <% end %>
+                    <% end %>
+                    </tbody>
+                </table>
+              <% end %>
+
+              <br>
+              <br>
+              </tr>
+              </tbody>
+              </table>
+          </aside>
+      </div>
+
+      <section id="one" class="wrapper style1">
+          <div class="inner">
+              <article class="feature left">
+                  <span class="image">
+                      <%= image_tag("pic01.jpg", alt: "", title: "") %>
+                  </span>
+                  <div class="content">
+                      <h2>Need work done?</h2>
+                      <p>Post your project and receive requests from freelancers within minutes. Our reputation system will make it easy to find the perfect freelancer for your job. It's the simplest and safest way to get work done online!</p>
+                  </div>
+              </article>
+              <article class="feature right">
+                  <span class="image">
+                      <%= image_tag("pic02.jpg", alt: "", title: "") %>
+                  </span>
+                  <div class="content">
+                      <h2>How do you benefit?</h2>
+                      <p>You'll receive requests from our talented freelancers within minutes</p>
+                      <p>Keeping up-to-date is easy with our realtime chat, 24/7 support, time tracker, and mobile apps</p>
+                      <p>Pay for work safely and securely. Only release payment when you are 100% satisfied with the work provided!</p>
+
+                  </div>
+              </article>
+          </div>
+      </section>
