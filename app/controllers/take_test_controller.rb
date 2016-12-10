@@ -20,6 +20,11 @@ class TakeTestController < ApplicationController
             flash[:danger] = "Cancel test!"
             redirect_to current_user
           end
+          #        @check = User.joins(:categories).where(id: current_user, categories:{id: params[:id] })
+          #        if !@check.empty? 
+          #          @tests = Question.where(category_id: params[:id]).joins(:answers).order("RANDOM()").limit(3).distinct
+          #          load_test @tests
+          #          @count_down = 15
         else 
           flash[:warning] = "You don't have permission"
           redirect_to current_user

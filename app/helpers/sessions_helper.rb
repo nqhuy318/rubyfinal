@@ -9,7 +9,11 @@ module SessionsHelper
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
+<<<<<<< HEAD
   def logged_in?
+=======
+   def logged_in?
+>>>>>>> master
     !current_user.nil?
   end
 
@@ -18,4 +22,8 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
   end
+<<<<<<< HEAD
+=======
+  
+>>>>>>> master
 end

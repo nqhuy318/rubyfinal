@@ -1,5 +1,6 @@
 class SearchWorksController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :advance
+
   def index
     @user = current_user
     if @user.nil?

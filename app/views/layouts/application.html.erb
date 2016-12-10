@@ -9,11 +9,19 @@
           <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
           </script>
         <![endif]-->
+<<<<<<< HEAD
         <!-- <style>
             body{
                 padding-top: 80px;
             }
         </style> -->
+=======
+        <style>
+            body{
+                padding-top: 80px;
+            }
+        </style>
+>>>>>>> master
     </head>
     <body>
         <%= render 'layouts/header' %>
@@ -21,7 +29,10 @@
             <% flash.each do |message_type, message| %>
               <div class="alert alert-<%= message_type %>"><%= message %></div>
             <% end %>
+<<<<<<< HEAD
             <%= yield :sidebar %>
+=======
+>>>>>>> master
             <%= yield %>
             <%= render 'layouts/footer' %>
     </div>
