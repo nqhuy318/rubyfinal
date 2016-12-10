@@ -11,4 +11,5 @@ class NotifierMailer < ApplicationMailer
 		@freelancer = freelancer
 		@customer = customer
 		mail to: @customer.email, subject: "A freelancer just join your work"
+  end
 end
