@@ -1,10 +1,13 @@
-
-<%= form_tag(search_works_path, :method => "post") do %>
+<<<<<<< HEAD
+<br>
+<br>
+<%= form_tag(search_works_path, :method => "post", remote: true) do %>
+  <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
   <% @categories.each do |category| %>
     <%= category.name %>
     <%= check_box_tag 'category_ids[]', category.id, class: 'form-control' %>
     <% end %>
-    <%= submit_tag "Search" %>
+    <%#= submit_tag "Search" %>
   <% end %>
 
   <hr/>

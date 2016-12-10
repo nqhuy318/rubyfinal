@@ -29,8 +29,8 @@ class JoinersController < ApplicationController
   end
 
   def destroy
-    joiner = Joiner.find(params[:id]).destroy
-    redirect_to work_path(joiner.work)
+    @joiner = Joiner.find(params[:id]).destroy
+    redirect_to work_path(@joiner.work)
   end
   
   private

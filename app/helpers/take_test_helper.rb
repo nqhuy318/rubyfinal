@@ -6,6 +6,27 @@ module TakeTestHelper
   def current_test
     @current_test = session[:questions]
   end
+<<<<<<< HEAD
+  
+  def is_loaded?
+    unless session[:questions].nil?
+      return true
+    end 
+    return false
+  end
+  
+  def destroy_test
+    session.delete(:questions)
+    @current_test = nil
+  end
+  
+  def get_time
+    @count_down = session[:time]
+  end
+  
+  def set_count_down_time(time)
+    session[:time] = time
+=======
   #  
   #  def current_question(index)
   #    @current_test ||= Question.find_by(id: session[:questions][index][:id])
@@ -23,5 +44,6 @@ module TakeTestHelper
     else
       return true
     end
+>>>>>>> master
   end
 end
