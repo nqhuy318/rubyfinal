@@ -6,7 +6,6 @@ module TakeTestHelper
   def current_test
     @current_test = session[:questions]
   end
-<<<<<<< HEAD
   
   def is_loaded?
     unless session[:questions].nil?
@@ -26,11 +25,10 @@ module TakeTestHelper
   
   def set_count_down_time(time)
     session[:time] = time
-=======
-  #  
-  #  def current_question(index)
-  #    @current_test ||= Question.find_by(id: session[:questions][index][:id])
-  #  end
+    #  
+    #  def current_question(index)
+    #    @current_test ||= Question.find_by(id: session[:questions][index][:id])
+  end
   
   def get_true_answer(question)
     @true_answer = Answer.joins(:question).where(tf:1, questions:{id: question})
@@ -44,6 +42,5 @@ module TakeTestHelper
     else
       return true
     end
->>>>>>> master
   end
 end
