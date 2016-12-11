@@ -103,58 +103,59 @@
               <hr/>
               <h3>List of joined works </h3>
               <table class="table table-border table-hover">
-                  <tr>
-                      <th>#</th>
-                      <th>Work's name</th>
-                      <th>Customer's name</th>
-                      <th>Review</th>
-                      <th>Quit</th>
-                  </tr>
-                  <% @user.joiners.each_with_index do |f, index|  %>
-                    <% if f.status == 1 %>
+                  <thead>
                       <tr>
-                          <td><%= index + 1%></td>
-                          <td><%=  link_to f.work.name, work_path(f.work) %></td>
-                          <td><%= link_to f.work.user.fullname, user_path(f.work.user)   %></td>
-                          <td>Nothing</td>
-                          <td><%= link_to f.destroy,"Quit", class: "btn btn-primary"%>
-                        </tr>
+                          <th>#</th>
+                          <th>Work's name</th>
+                          <th>Customer's name</th>
+                          <th>Review</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <% @user.joiners.each_with_index do |f, index|  %>
+                        <% if f.status == 1 %>
+                          <tr>
+                              <td><%= index + 1%></td>
+                              <td><%=  link_to f.work.name, work_path(f.work) %></td>
+                              <td><%= link_to f.work.user.fullname, user_path(f.work.user)   %></td>
+                              <td>Nothing</td>
+                          </tr>
+                        <% end %>
                       <% end %>
-                    <% end %>
-                    </tbody>
-                </table>
-              <% end %>
-
-              <br>
-              <br>
-              </tr>
-              </tbody>
+                  </tbody>
               </table>
-          </aside>
-      </div>
+            <% end %>
 
-      <section id="one" class="wrapper style1">
-          <div class="inner">
-              <article class="feature left">
-                  <span class="image">
-                      <%= image_tag("pic01.jpg", alt: "", title: "") %>
-                  </span>
-                  <div class="content">
-                      <h2>Need work done?</h2>
-                      <p>Post your project and receive requests from freelancers within minutes. Our reputation system will make it easy to find the perfect freelancer for your job. It's the simplest and safest way to get work done online!</p>
-                  </div>
-              </article>
-              <article class="feature right">
-                  <span class="image">
-                      <%= image_tag("pic02.jpg", alt: "", title: "") %>
-                  </span>
-                  <div class="content">
-                      <h2>How do you benefit?</h2>
-                      <p>You'll receive requests from our talented freelancers within minutes</p>
-                      <p>Keeping up-to-date is easy with our realtime chat, 24/7 support, time tracker, and mobile apps</p>
-                      <p>Pay for work safely and securely. Only release payment when you are 100% satisfied with the work provided!</p>
+            <br>
+            <br>
+            </tr>
+            </tbody>
+            </table>
+        </aside>
+    </div>
 
-                  </div>
-              </article>
-          </div>
-      </section>
+    <section id="one" class="wrapper style1">
+        <div class="inner">
+            <article class="feature left">
+                <span class="image">
+                    <%= image_tag("pic01.jpg", alt: "", title: "") %>
+                </span>
+                <div class="content">
+                    <h2>Need work done?</h2>
+                    <p>Post your project and receive requests from freelancers within minutes. Our reputation system will make it easy to find the perfect freelancer for your job. It's the simplest and safest way to get work done online!</p>
+                </div>
+            </article>
+            <article class="feature right">
+                <span class="image">
+                    <%= image_tag("pic02.jpg", alt: "", title: "") %>
+                </span>
+                <div class="content">
+                    <h2>How do you benefit?</h2>
+                    <p>You'll receive requests from our talented freelancers within minutes</p>
+                    <p>Keeping up-to-date is easy with our realtime chat, 24/7 support, time tracker, and mobile apps</p>
+                    <p>Pay for work safely and securely. Only release payment when you are 100% satisfied with the work provided!</p>
+
+                </div>
+            </article>
+        </div>
+    </section>

@@ -1,0 +1,51 @@
+<% provide(:title, 'List of joined works') %>
+<% unless @works.nil? %>
+  <h1>List of projects</h1>
+  <table class="table table-border table-hover">
+      <thead>
+          <tr>
+              <th>#</th>
+              <th>Work's name</th> 
+              <th>Skill Require</th>
+              <th>Price</th>
+              <th>Work's status</th>
+              <th>My status</th>
+              <th>Options</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% @works.each_with_index do |work, index|  %>
+            <tr>
+                <td><%= index + 1 %></td>
+                <td><%= link_to work.name, work_path(work) %></td>
+                <td><% work.categories.each do |category| %>
+                      <%=  link_to category.name, 'javascript:;',class: "btn btn-default" %>
+                      <%  end %>
+                  </td>
+                  <td><%= work.price %></td>
+                  <td><% if work.status == 1 %>
+                        <%= "Started" %>
+                      <% elsif work.status == 0 %>
+                        <%= "Waiting" %>
+                      <% elsif work.status == 2 %>
+                        <%= "Done" %>
+                      <% end %>
+                  </td>
+                  <td>
+                      <% if work.joiners[0].status == 0 %>
+                        <%= "Waiting" %>
+                      <% elsif work.joiners[0].status == 1 %>
+                        <%= "Accepted" %>
+                      <% end %>
+                  </td>
+                  <td>
+                      <%= form_for(work.joiners[0], url: joiner_path(work.joiners[0]), html: {method: "Delete"}) do |d|  %>
+                        <%= d.hidden_field :joiner_id, :value =>work.joiners[0].id %>
+                        <%#= d.hidden_field :work_id, :values =>work.id %>
+                        <%= d.submit "Out", class: "" %>
+                        <% end %>
+                    </td>
+                  <% end %>
+          </tbody>
+      </table>
+    <% end %>
