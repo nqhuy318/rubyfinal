@@ -6,6 +6,8 @@ class JoinersController < ApplicationController
     if check.empty?
       if @joiner.save
         flash[:success] = "Success!"
+        @customer = User.joins(:works).where(works:{id: @joiner.work_id}).distinct.first
+        NotifierMailer.send_join_to_customer(current_user, @customer)
         redirect_to "/search_works"
       else
         flash[:danger] = "Fail!"

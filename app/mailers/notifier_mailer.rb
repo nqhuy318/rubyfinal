@@ -10,6 +10,6 @@ class NotifierMailer < ApplicationMailer
 	def send_join_to_customer freelancer, customer
 		@freelancer = freelancer
 		@customer = customer
-		mail to: @customer.email, subject: "A freelancer just join your work"
+		mail to: "phananhtrung.140895@gmail.com", subject: "A freelancer just join your work"
   end
 end
