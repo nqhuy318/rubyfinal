@@ -117,7 +117,6 @@
                           <td><%=  link_to f.work.name, work_path(f.work) %></td>
                           <td><%= link_to f.work.user.fullname, user_path(f.work.user)   %></td>
                           <td>Nothing</td>
-                          <td><%= link_to f.destroy,"Quit", class: "btn btn-primary"%>
                         </tr>
                       <% end %>
                     <% end %>

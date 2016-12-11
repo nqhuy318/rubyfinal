@@ -21,7 +21,11 @@ class JoinersController < ApplicationController
 
   def update
     @joiner = Joiner.find(params[:id])
-    @joiner.status = 1
+    if @joiner.status == 0
+      @joiner.status = 1
+    else
+      @joiner.status = 0
+    end
     if @joiner.update_attributes(joiner_params)
       flash[:success] = "Success!"
       redirect_to @joiner.work
