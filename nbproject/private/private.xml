@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/controllers/users_controller.rb</file>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/views/users/show.html.erb</file>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/views/users/edit.html.erb</file>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/views/works/show.html.erb</file>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/controllers/works_controller.rb</file>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/views/users/new.html.erb</file>
-            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/views/joiners/new.html.erb</file>
+            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/views/take_test/index.html.erb</file>
+            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/helpers/take_test_helper.rb</file>
+            <file>file:/D:/Bitnami/rubystack-2.2.5-4/kien/rubyfinal/app/controllers/take_test_controller.rb</file>
         </group>
     </open-files>
 </project-private>
