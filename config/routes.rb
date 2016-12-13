@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   get 'joiners/new'
 
   # get 'joiners/edit'
-
   get 'joiners/delete'
+  get ':id/review_freelancers/new', to: 'review_freelancers#new'
+  post ':id/review_freelancers', to: 'review_freelancers#create'
 
   #  get 'works', to: 'works#index'
   #  get '/works/new', to: 'works#new'
@@ -36,5 +37,6 @@ Rails.application.routes.draw do
   resources :works
   resources :joiners
   resources :categories
+  resources :review_freelancers
 #  resources :take
 end

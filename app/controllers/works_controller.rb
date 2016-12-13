@@ -5,7 +5,7 @@ class WorksController < ApplicationController
     unless @user.nil?
       if(@user[:role_id] == 2)
         #        @joiner = Joiner.new;
-        @work = Work.joins(:user).left_outer_joins(:categories, :joiners).distinct.where(id: params[:id]).first
+        @work = Work.joins(:user).left_outer_joins(:categories, :joiners, :review_freelancer).distinct.where(id: params[:id]).first
 #        @work.status+=1
       elsif(@user[:role_id] == 1)
         @joiner = Joiner.new;
