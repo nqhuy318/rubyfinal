@@ -9,7 +9,7 @@ class SearchWorksController < ApplicationController
     else
       if @user[:role_id] == 1
         @categories = Category.joins(:freelancer_categories).where(freelancer_categories:{user_id: @user[:id]})
-        @works = Work.joins(:categories, :user).left_outer_joins(:joiners).where(status:0, categories:{id: @categories}).distinct
+        @works = Work.joins(:categories, :user).left_outer_joins(:joiners).where(status:[0, 4], categories:{id: @categories}).distinct
         @works = @works.sort do |a, b|
           case
           when check_not_match(@categories, a.categories) < check_not_match(@categories, b.categories)
@@ -23,10 +23,11 @@ class SearchWorksController < ApplicationController
             when check_match(@categories, a.categories) > check_match(@categories, b.categories)
               -1
             else
-              b.price <=> a.price
+              a.status <=> b.status
             end
           end
         end
+        #        @work = sort_work(@works, @categories)
       else
         flash[:danger] = "You don't have permission"
         redirect_to @user
@@ -41,10 +42,9 @@ class SearchWorksController < ApplicationController
       redirect_to login_path
     else
       if @user[:role_id] == 1
-        #        @categories = Category.joins(:freelancer_categories).where(freelancer_categories:{user_id: @user[:id]})
         if !params[:category_ids].nil?
           @categories = Category.joins(:freelancer_categories).where(freelancer_categories:{user_id: @user[:id]})
-          @works = Work.joins(:categories).joins(:user).where(status:0, categories:{id: params[:category_ids]}).distinct
+          @works = Work.joins(:categories, :user).where(status:[0, 4], categories:{id: params[:category_ids]}).distinct
           @works = @works.sort do |a, b|
             case
             when check_not_match(@categories, a.categories) < check_not_match(@categories, b.categories)
@@ -58,14 +58,14 @@ class SearchWorksController < ApplicationController
               when check_match(@categories, a.categories) > check_match(@categories, b.categories)
                 -1
               else
-                a.categories.length <=> b.categories.length
+                a.status <=> b.status
               end
             end
           end
-          print '123'
+          #          @work = sort_work(@works, @categories)
         else
           @categories = Category.joins(:freelancer_categories).where(freelancer_categories:{user_id: @user[:id]})
-          @works = Work.joins(:categories).joins(:user).where(status:0, categories:{id: @categories}).distinct
+          @works = Work.joins(:categories, :user).where(status:[0, 4], categories:{id: @categories}).distinct
           @works = @works.sort do |a, b|
             case
             when check_not_match(@categories, a.categories) < check_not_match(@categories, b.categories)
@@ -79,19 +79,18 @@ class SearchWorksController < ApplicationController
               when check_match(@categories, a.categories) > check_match(@categories, b.categories)
                 -1
               else
-                a.categories.length <=> b.categories.length
+                a.status <=> b.status
               end
             end
           end
+          #          @work = sort_work(@works, @categories)
         end
         render '_list_works', layout: false
-        #        render 'index'
       else
         flash[:danger] = "You don't have permission"
         redirect_to @user
       end
     end
-    #    render 'index'
   end
   
   def check_match(user_categories, work_categories)
@@ -124,4 +123,24 @@ class SearchWorksController < ApplicationController
     }
     return check
   end
+  
+  #  def sort_work(work, categories)
+  #    work = work.sort do |a, b|
+  #      case
+  #      when check_not_match(categories, a.categories) < check_not_match(categories, b.categories)
+  #        -1
+  #      when check_not_match(categories, a.categories) > check_not_match(categories, b.categories)
+  #        1
+  #      else
+  #        case
+  #        when check_match(categories, a.categories) < check_match(categories, b.categories) 
+  #          1
+  #        when check_match(categories, a.categories) > check_match(categories, b.categories)
+  #          -1
+  #        else
+  #          a.status <=> b.status
+  #        end
+  #      end
+  #    end
+  #  end
 end

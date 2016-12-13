@@ -9,6 +9,7 @@
             <th>Work name</th>
             <th>Skill</th>
             <th>Price</th>
+            <th>Work's status</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -29,6 +30,13 @@
                         <% end %>
                     </td>
                     <td><%= work.price %> $</td>
+                    <td>
+                        <%if work.status == 0%>
+                          Waiting
+                        <%else%>
+                          Delay
+                        <%end%>
+                    </td>
                     <td>
                         <%= link_to 'View detail', work_path(work), class: "btn btn-default"  %>
                       </td>

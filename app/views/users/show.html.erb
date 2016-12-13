@@ -9,7 +9,7 @@
     </aside>
 </div>
 <div class="row">
-    <aside class="col-md-5">
+    <aside class="col-md-6">
         <div class="user-info-detail">
             <h3>Profile</h3>
             <table class="table table-hover">
@@ -73,75 +73,60 @@
                 </tbody>
             </table>
           <% end %>
-          <% unless @user.works.empty? %>
-            <hr/>
-            <h1>List of works</h1>
-            <table class="table table-border table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Work's name</th> 
-                        <th>Skill Require</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @user.works.each_with_index do |work, index|  %>
-                      <tr>
-                          <td><%= index + 1 %></td>
-                          <td><%= work.name %></td>
-                          <td><% work.categories.each do |category| %>
-                                <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
-                                <%  end %>
-                            </td>
-                            <td><%= work.price %></td>
-                          <% end %>
-                  </tbody>
-              </table>
-            <% end %>
-            <% unless @user.joiners.empty? %>
-              <hr/>
-              <h3>List of joined works </h3>
-              <table class="table table-border table-hover">
-                  <thead>
-                      <tr>
-<<<<<<< HEAD
-                          <td><%= index + 1%></td>
-                          <td><%=  link_to f.work.name, work_path(f.work) %></td>
-                          <td><%= link_to f.work.user.fullname, user_path(f.work.user)   %></td>
-                          <td>Nothing</td>
-                        </tr>
-=======
-                          <th>#</th>
-                          <th>Work's name</th>
-                          <th>Customer's name</th>
-                          <th>Review</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <% @user.joiners.each_with_index do |f, index|  %>
-                        <% if f.status == 1 %>
-                          <tr>
-                              <td><%= index + 1%></td>
-                              <td><%=  link_to f.work.name, work_path(f.work) %></td>
-                              <td><%= link_to f.work.user.fullname, user_path(f.work.user)   %></td>
-                              <td>Nothing</td>
-                          </tr>
-                        <% end %>
->>>>>>> b19f6250ef2a1aff21030b849c3b906d865c0d93
-                      <% end %>
-                  </tbody>
-              </table>
-            <% end %>
-
-            <br>
-            <br>
+      </aside>
+  </div>
+  <% unless @user.works.empty? %>
+    <hr/>
+    <h1>List of works</h1>
+    <table class="table table-border table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Work's name</th> 
+                <th>Skill Require</th>
+                <th>Price</th>
             </tr>
-            </tbody>
-            </table>
-        </aside>
-    </div>
-
+        </thead>
+        <tbody>
+            <% @user.works.each_with_index do |work, index|  %>
+              <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= work.name %></td>
+                  <td><% work.categories.each do |category| %>
+                        <%=  link_to category.name, 'javascript:;',class: "btn btn-primary" %>
+                        <%  end %>
+                    </td>
+                    <td><%= work.price %></td>
+                  <% end %>
+          </tbody>
+      </table>
+    <% end %>
+    <% unless @user.joiners.empty? %>
+      <hr/>
+      <h3>List of joined works </h3>
+      <table class="table table-border table-hover">
+          <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Work's name</th>
+                  <th>Customer's name</th>
+                  <th>Review</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% @user.joiners.each_with_index do |f, index|  %>
+                <% if f.status == 1 %>
+                  <tr>
+                      <td><%= index + 1%></td>
+                      <td><%=  link_to f.work.name, work_path(f.work) %></td>
+                      <td><%= link_to f.work.user.fullname, user_path(f.work.user)   %></td>
+                      <td>Nothing</td>
+                  </tr>
+                <% end %>
+              <% end %>
+          </tbody>
+      </table>
+    <% end %>
     <section id="one" class="wrapper style1">
         <div class="inner">
             <article class="feature left">
@@ -162,7 +147,6 @@
                     <p>You'll receive requests from our talented freelancers within minutes</p>
                     <p>Keeping up-to-date is easy with our realtime chat, 24/7 support, time tracker, and mobile apps</p>
                     <p>Pay for work safely and securely. Only release payment when you are 100% satisfied with the work provided!</p>
-
                 </div>
             </article>
         </div>
