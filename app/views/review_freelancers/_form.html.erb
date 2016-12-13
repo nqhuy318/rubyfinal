@@ -1,0 +1,9 @@
+<%= form_for(@review_freelancer) do |f| %>
+<div class="field">
+<%= @work.name %>
+<%= f.hidden_field :joiner_id, :value =>@review_freelancer.joiner_id %>
+	<%= f.text_area :content %>
+	<%= f.select :rank, [1,2,3,4,5]%>
+</div>
+	<%= f.submit "Post", class: "btn btn-primary" %>
+<%end%>
