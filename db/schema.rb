@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20161202084838) do
   create_table "review_freelancers", force: :cascade do |t|
     t.string   "content"
     t.float    "rank"
-    t.integer  "work_id"
     t.integer  "joiner_id"
+    t.integer  "work_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["joiner_id"], name: "index_review_freelancers_on_joiner_id"
