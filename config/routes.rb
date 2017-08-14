@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :search_images
   get 'categories/index'
 
   get 'category/index'

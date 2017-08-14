@@ -1,0 +1,1 @@
+json.partial! "search_images/search_image", search_image: @search_image

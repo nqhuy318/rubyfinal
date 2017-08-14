@@ -1,0 +1,2 @@
+class SearchImage < ApplicationRecord
+end
